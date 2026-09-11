@@ -14,7 +14,7 @@ export function getBotResponse(message) {
     text.includes("hi") ||
     text.includes("hey")
   ) {
-    return "Hello 👋 Welcome to CoreAMP Engineering. I can help you with Electrical Design, Power System Studies, MEP Engineering and project consultation.";
+    return "Hello \u{1F44B} Welcome to CoreAMP Engineering. I can help you with Electrical Design, Power System Studies, MEP Engineering and project consultation.";
   }
 
   if (

@@ -1,11 +1,13 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import './SectionHeader.css';
 
 export default function SectionHeader({ eyebrow, title, text, dark = false, center = false }) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <motion.div
       className={`section-header ${center ? 'center' : ''}`}
-      initial={{ opacity: 0, y: 20 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: .2 }}
       transition={{ duration: .55 }}

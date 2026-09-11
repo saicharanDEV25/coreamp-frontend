@@ -1,20 +1,62 @@
-import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone } from 'lucide-react';
-import './Footer.css';
+import { Mail, MapPin, Phone, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
+import { COREAMP_CONTACT } from "../../data/contact";
+import "./Footer.css";
 
 export default function Footer() {
   return (
     <footer className="footer">
+      <div className="footer-grid-pattern" aria-hidden="true" />
+
       <div className="container footer-grid">
-        <div>
-          <div className="brand footer-brand"><span className="brand-mark">CA</span><span className="brand-copy"><strong>COREAMP</strong><small>ENGINEERING</small></span></div>
-          <p>Electrical engineering, power-system studies and coordinated MEP design built around safety, performance and constructability.</p>
+        <div className="footer-overview">
+          <Link to="/" className="footer-brand" aria-label="CoreAMP home">
+            <span className="footer-brand-mark" aria-hidden="true">
+              <Zap size={20} strokeWidth={1.6} />
+            </span>
+            <span className="footer-brand-copy">
+              <strong>COREAMP</strong>
+              <small>ENGINEERING</small>
+            </span>
+          </Link>
+          <p>
+            Electrical engineering, power-system studies and coordinated MEP
+            design built around safety, performance and constructability.
+          </p>
         </div>
-        <div><h4>Quick Links</h4><Link to="/about">About</Link><Link to="/projects">Projects</Link><Link to="/services">Services</Link><Link to="/contact">Contact</Link></div>
-        <div><h4>Engineering</h4><Link to="/electrical-design">Electrical Design</Link><Link to="/electrical-design#studies">Power System Studies</Link><Link to="/services/mep-design">MEP Design</Link><span>Engineering Review</span></div>
-        <div><h4>Contact</h4><span><MapPin size={16}/> Bengaluru, India</span><span><Phone size={16}/> +91 XXXXX XXXXX</span><span><Mail size={16}/> hello@coreamp.in</span></div>
+
+        <nav className="footer-column" aria-label="Footer navigation">
+          <h3>Navigate</h3>
+          <Link to="/#about">About</Link>
+          <Link to="/#projects">Project sectors</Link>
+          <Link to="/#services">Services</Link>
+          <Link to="/#contact">Contact</Link>
+        </nav>
+
+        <nav className="footer-column" aria-label="Engineering services">
+          <h3>Engineering</h3>
+          <Link to="/#services">Electrical design</Link>
+          <Link to="/#services">Power-system studies</Link>
+          <Link to="/#services">MEP design</Link>
+          <Link to="/#contact">Engineering review</Link>
+        </nav>
+
+        <div className="footer-column footer-contact">
+          <h3>Contact</h3>
+          <span><MapPin size={15} /> Bengaluru, India</span>
+          <a href={`tel:${COREAMP_CONTACT.phoneHref}`}>
+            <Phone size={15} /> {COREAMP_CONTACT.phoneDisplay}
+          </a>
+          <a href={`mailto:${COREAMP_CONTACT.email}`}>
+            <Mail size={15} /> {COREAMP_CONTACT.email}
+          </a>
+        </div>
       </div>
-      <div className="container footer-bottom"><span>© 2026 CoreAmp Engineering. All rights reserved.</span><span>Engineered for performance.</span></div>
+
+      <div className="container footer-bottom">
+        <span>&copy; 2026 CoreAMP Engineering. All rights reserved.</span>
+        <span>Electrical / Power Systems / MEP</span>
+      </div>
     </footer>
   );
 }

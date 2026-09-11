@@ -1,25 +1,38 @@
-# CoreAmp Engineering Frontend
+# CoreAMP Engineering Frontend
 
-React + Vite frontend focused on Electrical Engineering, Power System Studies and MEP Design & Coordination.
+A responsive React + Vite website for CoreAMP's electrical engineering,
+power-system studies and coordinated MEP services.
 
-## Run
+## Included
+
+- Premium responsive one-page frontend with Home, Services, Projects, About and Contact sections
+- Accessible mobile navigation, section anchors and legacy route redirects
+- Filterable representative project portfolio
+- Keyboard-friendly consultation dialog with validated fields
+- Contact and consultation forms that prepare a structured WhatsApp enquiry
+- Guided CoreAMP virtual assistant and direct WhatsApp action
+- Reduced-motion support and visible keyboard focus states
+
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build
+Production build:
 
 ```bash
 npm run build
+npm run preview
 ```
 
-## Structure
+## Content configuration
 
-Each reusable component has its own folder with JSX + CSS, for example:
+- Contact details and WhatsApp number: `src/data/contact.js`
+- Services, capabilities, sectors and project profiles: `src/data/siteData.js`
+- Route redirects and metadata: `src/App.jsx`
 
-`src/components/Hero/Hero.jsx`
-`src/components/Hero/Hero.css`
-
-Pages are also separated into their own JSX + CSS folders.
+Forms currently hand the completed brief to WhatsApp, so no backend is required.
+`vercel.json` includes the SPA rewrite needed for direct route navigation on
+Vercel.

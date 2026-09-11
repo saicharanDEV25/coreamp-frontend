@@ -12,6 +12,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 import ChatMessage from "./ChatMessage";
+import { createWhatsAppLeadLink } from "../../data/contact";
 import "./ChatWindow.css";
 
 const services = {
@@ -56,7 +57,7 @@ export default function ChatWindow({ onClose }) {
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "Hi 👋 Welcome to CoreAMP Engineering. What’s your name?",
+      text: "Hi \u{1F44B} Welcome to CoreAMP Engineering. What's your name?",
     },
   ]);
 
@@ -90,7 +91,7 @@ export default function ChatWindow({ onClose }) {
     setTimeout(() => {
       addMessage(
         "bot",
-        `Hi ${cleanName}! 👋 Nice to meet you. Please share your contact details.`
+        `Hi ${cleanName}! \u{1F44B} Nice to meet you. Please share your contact details.`
       );
 
       setStep("contact");
@@ -148,20 +149,14 @@ export default function ChatWindow({ onClose }) {
   };
 
   const getWhatsAppLink = () => {
-    const whatsappNumber = "919014842227";
-
-    const message = `Hello CoreAMP Engineering,
-
-Hi, I'm ${name}.
-
-Service: ${selectedService}
-Requirement: ${selectedRequirement}
-
-I would like to discuss my project.`;
-
-    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-      message
-    )}`;
+    return createWhatsAppLeadLink({
+      source: "Virtual assistant",
+      name,
+      phone,
+      email,
+      service: selectedService,
+      requirement: selectedRequirement,
+    });
   };
 
   const handleBack = () => {
@@ -376,7 +371,7 @@ I would like to discuss my project.`;
             </a>
 
             <p>
-              You’ll be redirected to our CoreAMP
+              You'll be redirected to our CoreAMP
               Engineering team.
             </p>
           </div>

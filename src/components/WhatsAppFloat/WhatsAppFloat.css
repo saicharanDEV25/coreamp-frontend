@@ -1,4 +1,4 @@
-.coreamp-whatsapp-float {
+﻿.coreamp-whatsapp-float {
   position: fixed;
 
   right: 28px;
@@ -21,7 +21,7 @@
 
   text-decoration: none;
 
-  z-index: 9999;
+  z-index: 900;
 
   box-shadow:
     0 10px 28px rgba(0, 0, 0, 0.3),
@@ -32,7 +32,7 @@
     box-shadow 0.3s ease,
     background 0.3s ease;
 
-  animation: whatsappPulse 2.8s infinite;
+  animation: none;
 }
 
 .coreamp-whatsapp-float:hover {
@@ -42,6 +42,11 @@
   box-shadow:
     0 16px 35px rgba(0, 0, 0, 0.32),
     0 0 0 9px rgba(37, 211, 102, 0.12);
+}
+
+.coreamp-whatsapp-float:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
 }
 
 .coreamp-whatsapp-icon {
@@ -75,15 +80,15 @@
 
 @media (max-width: 768px) {
   .coreamp-whatsapp-float {
-    width: 56px;
-    height: 56px;
+    width: 50px;
+    height: 50px;
 
     right: 18px;
     bottom: 18px;
   }
 
   .coreamp-whatsapp-icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
 }

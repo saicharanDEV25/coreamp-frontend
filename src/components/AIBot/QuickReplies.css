@@ -1,4 +1,4 @@
-.quick-replies {
+﻿.quick-replies {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -9,13 +9,13 @@
 .quick-reply-button {
   padding: 8px 12px;
 
-  border: 1px solid rgba(211, 170, 98, 0.35);
+  border: 1px solid rgba(20, 184, 166, 0.35);
 
   border-radius: 20px;
 
-  background: rgba(211, 170, 98, 0.08);
+  background: rgba(20, 184, 166, 0.08);
 
-  color: #d3aa62;
+  color: var(--accent);
 
   font-size: 11px;
   font-weight: 500;
@@ -30,11 +30,11 @@
 }
 
 .quick-reply-button:hover {
-  background: #d3aa62;
+  background: var(--accent);
 
   color: #111;
 
-  border-color: #d3aa62;
+  border-color: var(--accent);
 
   transform: translateY(-2px);
 }

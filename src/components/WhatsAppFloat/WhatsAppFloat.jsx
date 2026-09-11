@@ -1,13 +1,10 @@
 import "./WhatsAppFloat.css";
+import { createWhatsAppLeadLink } from "../../data/contact";
 
 export default function WhatsAppFloat() {
-  const phoneNumber = "919999999999"; // client WhatsApp number replace cheyi
-  const message =
-    "Hello CoreAmp Engineering, I would like to discuss a project.";
-
-  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-    message
-  )}`;
+  const whatsappLink = createWhatsAppLeadLink({
+    source: "Floating WhatsApp button",
+  });
 
   return (
     <a
@@ -15,7 +12,7 @@ export default function WhatsAppFloat() {
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with CoreAmp Engineering on WhatsApp"
+      aria-label="Chat with CoreAMP Engineering on WhatsApp"
     >
       <svg
         className="coreamp-whatsapp-icon"

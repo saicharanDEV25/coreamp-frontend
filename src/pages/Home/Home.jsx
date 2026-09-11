@@ -1,524 +1,285 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   CircuitBoard,
+  ClipboardCheck,
+  DraftingCompass,
   Layers3,
   MessageCircle,
+  SearchCheck,
   ShieldCheck,
+  Workflow,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import Hero from "../../components/Hero/Hero";
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import ServiceCard from "../../components/ServiceCard/ServiceCard";
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
-import ElectricalCapabilities from "../../components/ElectricalCapabilities/ElectricalCapabilities";
-import MepOverview from "../../components/MepOverview/MepOverview";
-
-import {
-  projects,
-  services,
-} from "../../data/siteData";
-
+import { COREAMP_CONTACT } from "../../data/contact";
+import { projects, services } from "../../data/siteData";
 import "./Home.css";
 
 const reveal = {
-  initial: {
-    opacity: 0,
-    y: 35,
-  },
-
-  whileInView: {
-    opacity: 1,
-    y: 0,
-  },
-
-  viewport: {
-    once: true,
-    amount: 0.16,
-  },
-
-  transition: {
-    duration: 0.8,
-    ease: [0.22, 1, 0.36, 1],
-  },
+  initial: { opacity: 0, y: 44 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.14 },
+  transition: { duration: 1.28, ease: [0.16, 1, 0.3, 1] },
 };
 
-export default function Home({
-  onConsult,
-}) {
-  const whatsappNumber = "919014842227";
+const processSteps = [
+  {
+    icon: SearchCheck,
+    number: "01",
+    title: "Understand",
+    text: "Map the brief, constraints, loads and critical interfaces before design begins.",
+  },
+  {
+    icon: DraftingCompass,
+    number: "02",
+    title: "Engineer",
+    text: "Develop the system architecture, calculations, selections and coordinated layouts.",
+  },
+  {
+    icon: Workflow,
+    number: "03",
+    title: "Coordinate",
+    text: "Resolve multidisciplinary interfaces across architecture, structure and building services.",
+  },
+  {
+    icon: ClipboardCheck,
+    number: "04",
+    title: "Deliver",
+    text: "Issue clear technical information for review, procurement and execution support.",
+  },
+];
 
-  const whatsappMessage =
-    "Hello CoreAMP Engineering, I would like to discuss my project.";
+export default function Home({ onConsult }) {
+  const reduceMotion = useReducedMotion();
+  const revealMotion = reduceMotion ? { initial: false } : reveal;
 
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    whatsappMessage
+  const whatsappLink = `https://wa.me/${COREAMP_CONTACT.whatsappNumber}?text=${encodeURIComponent(
+    "Hello CoreAMP Engineering, I would like to discuss my project."
   )}`;
 
   return (
     <>
-      {/* =====================================
-          HOME / HERO
-      ====================================== */}
-
       <Hero onConsult={onConsult} />
 
-      {/* =====================================
-    SERVICES
-====================================== */}
+      <section id="services" className="section section-dark home-services">
+        <div className="home-services-glow" aria-hidden="true" />
+        <div className="container">
+          <div className="home-section-head">
+            <SectionHeader
+              eyebrow="Our capabilities"
+              title="Engineering that starts with power."
+              text="Electrical engineering is the core, supported by power-system analysis and coordinated building-services design."
+            />
+            <Link className="text-link light" to="/#contact">
+              Start a service enquiry <ArrowRight size={17} />
+            </Link>
+          </div>
 
-<section
-  id="services"
-  className="section section-dark home-services premium-services"
->
-  <div className="services-glow services-glow-one" />
-  <div className="services-glow services-glow-two" />
-
-  <div className="container premium-services-container">
-    <motion.div
-      className="home-section-head"
-      initial={{
-        opacity: 0,
-        y: 45,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      viewport={{
-        once: true,
-        amount: 0.25,
-      }}
-      transition={{
-        duration: 1,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
-      <SectionHeader
-        eyebrow="Our Capabilities"
-        title="Engineering that starts with power."
-        text="Electrical engineering is the primary focus, supported by coordinated building-services design."
-      />
-
-      <Link
-        className="text-link light"
-        to="/services"
-      >
-        Explore all services
-        <ArrowRight size={17} />
-      </Link>
-    </motion.div>
-
-    <motion.div
-      className="home-service-grid"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{
-        once: true,
-        amount: 0.12,
-      }}
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0.18,
-            delayChildren: 0.18,
-          },
-        },
-      }}
-    >
-      {services.map((service, index) => (
-        <motion.div
-          key={service.title}
-          className="premium-service-motion"
-          variants={{
-            hidden: {
-              opacity: 0,
-              y: 55,
-              scale: 0.97,
-              filter: "blur(5px)",
-            },
-
-            visible: {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              filter: "blur(0px)",
-
-              transition: {
-                duration: 0.95,
-                ease: [0.22, 1, 0.36, 1],
-              },
-            },
-          }}
-        >
-          <ServiceCard
-            service={service}
-            index={index}
-          />
-        </motion.div>
-      ))}
-    </motion.div>
-  </div>
-</section>
-
-      {/* =====================================
-          ELECTRICAL
-      ====================================== */}
-
-      <section
-        id="electrical"
-        className="home-scroll-section"
-      >
-        <ElectricalCapabilities compact />
+          <div className="home-service-grid">
+            {services.map((service, index) => (
+              <ServiceCard key={service.title} service={service} index={index} />
+            ))}
+          </div>
+        </div>
       </section>
 
-      {/* =====================================
-          MEP
-      ====================================== */}
-
-      <section
-        id="mep"
-        className="home-scroll-section"
-      >
-        <MepOverview compact />
-      </section>
-
-      {/* =====================================
-          PROJECTS
-      ====================================== */}
-
-      <section
-        id="projects"
-        className="section home-projects"
-      >
+      <section id="projects" className="section home-projects surface-grid">
         <div className="container">
           <div className="home-section-head light-head">
             <SectionHeader
-              eyebrow="Selected Work"
-              title="Projects shaped by engineering intent."
-              text="Representative project types aligned to the electrical and MEP capability profile."
+              eyebrow="Capability portfolio"
+              title="Engineering for varied project environments."
+              text="Representative project types that show where CoreAMP's electrical and coordinated MEP capabilities can be applied."
               dark
             />
-
-            <Link
-              className="text-link"
-              to="/projects"
-            >
-              View all projects
-              <ArrowRight size={17} />
+            <Link className="text-link" to="/#contact">
+              Discuss your sector <ArrowRight size={17} />
             </Link>
           </div>
 
           <div className="home-project-grid">
-            {projects
-              .slice(0, 4)
-              .map(
-                (project, index) => (
-                  <ProjectCard
-                    key={project.title}
-                    project={project}
-                    wide={index === 0}
-                  />
-                )
-              )}
+            {projects.slice(0, 3).map((project, index) => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                index={index}
+                wide={index === 0}
+              />
+            ))}
+          </div>
+
+          <p className="home-project-note">
+            Imagery is illustrative. Scope is tailored to each project brief,
+            authority requirement and delivery stage.
+          </p>
+        </div>
+      </section>
+
+      <section className="section home-process">
+        <div className="container">
+          <div className="home-process-heading">
+            <div>
+              <span className="eyebrow dark">How we work</span>
+              <h2>
+                One clear path from
+                <br /> brief to <em>buildable design.</em>
+              </h2>
+            </div>
+            <p>
+              Every engagement follows a disciplined workflow designed to make
+              technical decisions visible, coordinated and easier to act on.
+            </p>
+          </div>
+
+          <div className="home-process-grid">
+            {processSteps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <motion.article
+                  key={step.number}
+                  {...revealMotion}
+                  transition={
+                    reduceMotion
+                      ? undefined
+                      : { ...reveal.transition, delay: index * 0.06 }
+                  }
+                >
+                  <div className="home-process-card-top">
+                    <span>{step.number}</span>
+                    <Icon size={22} strokeWidth={1.5} />
+                  </div>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </motion.article>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* =====================================
-          ABOUT
-      ====================================== */}
-
-      <section
-        id="about"
-        className="coreamp-home-about"
-      >
-        <div className="coreamp-about-grid-bg" />
-
+      <section id="about" className="coreamp-home-about">
+        <div className="coreamp-about-grid-bg" aria-hidden="true" />
         <div className="container coreamp-about-container">
-          <motion.div
-            className="coreamp-about-heading"
-            {...reveal}
-          >
-            <span className="coreamp-section-tag">
-              ABOUT COREAMP
-            </span>
-
+          <motion.div className="coreamp-about-heading" {...revealMotion}>
+            <span className="coreamp-section-tag">ABOUT COREAMP</span>
             <h2>
               Precision in power.
               <br />
-
-              <em>
-                Clarity in engineering.
-              </em>
+              <em>Clarity in engineering.</em>
             </h2>
           </motion.div>
 
-          <motion.div
-            className="coreamp-about-intro"
-            {...reveal}
-          >
+          <motion.div className="coreamp-about-intro" {...revealMotion}>
             <div className="coreamp-about-line" />
-
             <p>
-              CoreAMP brings electrical
-              engineering, power-system studies
-              and coordinated MEP design into
-              one disciplined engineering
-              workflow.
+              CoreAMP brings electrical engineering, power-system studies and
+              coordinated MEP design into one disciplined workflow.
             </p>
-
             <p className="coreamp-about-muted">
-              From early design decisions through
-              detailed engineering and project
-              coordination, our focus is on
-              practical systems, technical
+              From early system decisions through detailed engineering and
+              coordination, the focus stays on practical systems, technical
               reliability and clear delivery.
             </p>
-
-            <Link
-              to="/about"
-              className="coreamp-about-action"
-            >
-              Discover our approach
-              <ArrowRight size={17} />
+            <Link to="/#contact" className="coreamp-about-action">
+              Talk to the team <ArrowRight size={17} />
             </Link>
           </motion.div>
 
           <div className="coreamp-about-capabilities">
-            {/* ELECTRICAL */}
-
-            <motion.article
-              className="coreamp-about-capability"
-              {...reveal}
-            >
+            <motion.article className="coreamp-about-capability" {...revealMotion}>
               <div className="coreamp-about-icon">
-                <CircuitBoard
-                  size={22}
-                  strokeWidth={1.6}
-                />
+                <CircuitBoard size={22} strokeWidth={1.6} />
               </div>
-
-              <span className="coreamp-about-number">
-                01
-              </span>
-
-              <h3>
-                Electrical Engineering
-              </h3>
-
+              <span className="coreamp-about-number">01 / CORE</span>
+              <h3>Electrical Engineering</h3>
               <p>
-                Power distribution, SLDs,
-                load calculations, equipment
-                sizing, cable engineering,
-                grounding and lighting design.
+                Distribution, SLDs, load calculations, equipment sizing,
+                cables, grounding and lighting design.
               </p>
-
-              <Link to="/electrical-design">
-                Explore Electrical
-                <ArrowRight size={15} />
+              <Link to="/#services">
+                View services <ArrowRight size={15} />
               </Link>
             </motion.article>
 
-            {/* POWER STUDIES */}
-
-            <motion.article
-              className="coreamp-about-capability"
-              {...reveal}
-            >
+            <motion.article className="coreamp-about-capability" {...revealMotion}>
               <div className="coreamp-about-icon">
-                <ShieldCheck
-                  size={22}
-                  strokeWidth={1.6}
-                />
+                <ShieldCheck size={22} strokeWidth={1.6} />
               </div>
-
-              <span className="coreamp-about-number">
-                02
-              </span>
-
-              <h3>
-                Power System Studies
-              </h3>
-
+              <span className="coreamp-about-number">02 / VALIDATE</span>
+              <h3>Power System Studies</h3>
               <p>
-                SKM modeling, load flow,
-                short circuit, protective
-                device coordination and
-                arc-flash engineering studies.
+                SKM modeling, load flow, short circuit, protection coordination
+                and arc-flash analysis.
               </p>
-
-              <Link to="/services">
-                Explore Studies
-                <ArrowRight size={15} />
+              <Link to="/#services">
+                View studies <ArrowRight size={15} />
               </Link>
             </motion.article>
 
-            {/* MEP */}
-
-            <motion.article
-              className="coreamp-about-capability"
-              {...reveal}
-            >
+            <motion.article className="coreamp-about-capability" {...revealMotion}>
               <div className="coreamp-about-icon">
-                <Layers3
-                  size={22}
-                  strokeWidth={1.6}
-                />
+                <Layers3 size={22} strokeWidth={1.6} />
               </div>
-
-              <span className="coreamp-about-number">
-                03
-              </span>
-
-              <h3>
-                Coordinated MEP
-              </h3>
-
+              <span className="coreamp-about-number">03 / ALIGN</span>
+              <h3>Coordinated MEP</h3>
               <p>
-                Integrated electrical,
-                mechanical, plumbing,
-                life-safety and low-current
-                coordination for complex
-                building projects.
+                Integrated electrical, mechanical, plumbing, life-safety and
+                low-current coordination.
               </p>
-
-              <Link to="/services/mep-design">
-                Explore MEP
-                <ArrowRight size={15} />
+              <Link to="/#services">
+                View coordination <ArrowRight size={15} />
               </Link>
             </motion.article>
           </div>
-
-          <motion.div
-            className="coreamp-about-stats"
-            {...reveal}
-          >
-            <div>
-              <strong>7</strong>
-
-              <span>
-                Electrical Design
-                Capabilities
-              </span>
-            </div>
-
-            <div>
-              <strong>5</strong>
-
-              <span>
-                Power System
-                Studies
-              </span>
-            </div>
-
-            <div>
-              <strong>6</strong>
-
-              <span>
-                Project
-                Sectors
-              </span>
-            </div>
-          </motion.div>
         </div>
       </section>
 
-      {/* =====================================
-          CONTACT
-      ====================================== */}
-
-      <section
-        id="contact"
-        className="coreamp-home-contact"
-      >
-        <div className="coreamp-contact-glow" />
-
-        <div className="coreamp-contact-line coreamp-contact-line-one" />
-
-        <div className="coreamp-contact-line coreamp-contact-line-two" />
+      <section id="contact" className="coreamp-home-contact">
+        <div className="coreamp-contact-glow" aria-hidden="true" />
+        <div className="coreamp-contact-line coreamp-contact-line-one" aria-hidden="true" />
+        <div className="coreamp-contact-line coreamp-contact-line-two" aria-hidden="true" />
 
         <div className="container coreamp-contact-container">
-          {/* LEFT CONTENT */}
-
-          <motion.div
-            className="coreamp-contact-copy"
-            {...reveal}
-          >
-            <span className="coreamp-section-tag">
-              START A PROJECT
-            </span>
-
+          <motion.div className="coreamp-contact-copy" {...revealMotion}>
+            <span className="coreamp-section-tag">START A PROJECT</span>
             <h2>
               Your project.
               <br />
-
-              <em>
-                Engineered with clarity.
-              </em>
+              <em>Engineered with clarity.</em>
             </h2>
-
             <p>
-              Planning an electrical,
-              power-system or MEP project?
-              Share your requirements with
-              CoreAMP and let’s identify the
-              right engineering approach.
+              Planning an electrical, power-system or MEP project? Share the
+              brief and let&apos;s identify the right engineering approach.
             </p>
           </motion.div>
 
-          {/* RIGHT CONTACT CARD */}
-
-          <motion.div
-            className="coreamp-contact-card"
-            {...reveal}
-          >
-            <span className="coreamp-contact-card-label">
-              PROJECT CONSULTATION
-            </span>
-
-            <h3>
-              Let’s discuss your
-              engineering requirements.
-            </h3>
-
+          <motion.div className="coreamp-contact-card" {...revealMotion}>
+            <span className="coreamp-contact-card-label">PROJECT CONSULTATION</span>
+            <h3>Let&apos;s discuss your engineering requirement.</h3>
             <p>
-              Start with a consultation or
-              connect directly with our team
-              through WhatsApp.
+              Start with a structured enquiry or connect directly with the
+              CoreAMP team through WhatsApp.
             </p>
-
             <button
               type="button"
               className="coreamp-contact-consult"
               onClick={onConsult}
             >
-              Book Consultation
-
-              <ArrowRight size={17} />
+              Book consultation <ArrowRight size={17} />
             </button>
-
             <a
               className="coreamp-contact-whatsapp"
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <MessageCircle size={19} />
-
-              Chat with CoreAMP
+              <MessageCircle size={19} /> Chat with CoreAMP
             </a>
-
-            <Link
-              className="coreamp-contact-page-link"
-              to="/contact"
-            >
-              View Contact Page
-
-              <ArrowRight size={15} />
-            </Link>
           </motion.div>
         </div>
       </section>

@@ -13,15 +13,46 @@ export default function AIBot({
   const [open, setOpen] = useState(false);
 
   const [showHint, setShowHint] =
-    useState(true);
+    useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowHint(false);
-    }, 10000);
+    const isSmallScreen = window.matchMedia(
+      "(max-width: 760px)"
+    ).matches;
 
-    return () =>
-      clearTimeout(timer);
+    let hintSeen = false;
+
+    try {
+      hintSeen = window.sessionStorage.getItem(
+        "coreamp-assistant-hint"
+      ) === "seen";
+    } catch {
+      hintSeen = false;
+    }
+
+    if (isSmallScreen || hintSeen) return undefined;
+
+    const showTimer = window.setTimeout(() => {
+      setShowHint(true);
+
+      try {
+        window.sessionStorage.setItem(
+          "coreamp-assistant-hint",
+          "seen"
+        );
+      } catch {
+        // The hint still works when storage is unavailable.
+      }
+    }, 6500);
+
+    const hideTimer = window.setTimeout(() => {
+      setShowHint(false);
+    }, 13500);
+
+    return () => {
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
+    };
   }, []);
 
   const handleBotClick = () => {
@@ -61,13 +92,13 @@ export default function AIBot({
           <div className="ai-intro-content">
             <strong>
               Hi! I'm CoreAMP Virtual
-              Assistant 👋
+              Assistant {"\u{1F44B}"}
             </strong>
 
             <span>
               Confused about your
-              project? Chat with us —
-              I’ll help you find the
+              project? Chat with us -
+              I'll help you find the
               right solution.
             </span>
           </div>
@@ -83,7 +114,8 @@ export default function AIBot({
           open ? "ai-open" : ""
         }`}
         onClick={handleBotClick}
-        aria-label="Open CoreAMP Assistant"
+        aria-label={open ? "Close CoreAMP Assistant" : "Open CoreAMP Assistant"}
+        aria-expanded={open}
         title="Chat with CoreAMP Assistant"
       >
         <span className="ai-button-ring" />

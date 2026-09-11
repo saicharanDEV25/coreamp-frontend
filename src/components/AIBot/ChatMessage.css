@@ -1,4 +1,4 @@
-.chat-message-row {
+﻿.chat-message-row {
   display: flex;
   width: 100%;
   gap: 9px;
@@ -25,7 +25,7 @@
 
   border-radius: 50%;
 
-  background: #d3aa62;
+  background: var(--accent);
   color: #111;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .user-message {
-  background: #d3aa62;
+  background: var(--accent);
   color: #111;
 
   border-radius: 14px 4px 14px 14px;

@@ -1,160 +1,96 @@
 import { useEffect, useState } from "react";
-import {
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
-import ConsultationModal from "./components/ConsultationModal/ConsultationModal";
-import WhatsAppFloat from "./components/WhatsAppFloat/WhatsAppFloat";
 import AIBot from "./components/AIBot/AIBot";
-
+import ConsultationModal from "./components/ConsultationModal/ConsultationModal";
+import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar/Navbar";
+import WhatsAppFloat from "./components/WhatsAppFloat/WhatsAppFloat";
 import Home from "./pages/Home/Home";
-import About from "./pages/About/About";
-import Services from "./pages/Services/Services";
-import ElectricalDesign from "./pages/ElectricalDesign/ElectricalDesign";
-import MepDesign from "./pages/MepDesign/MepDesign";
-import Projects from "./pages/Projects/Projects";
-import Contact from "./pages/Contact/Contact";
+
+const routeMeta = {
+  "/": {
+    title: "CoreAMP Engineering | Electrical Design & Power Studies",
+    description:
+      "Electrical design, power-system studies and coordinated MEP engineering for reliable, buildable projects.",
+  },
+};
 
 export default function App() {
   const [consultationOpen, setConsultationOpen] = useState(false);
-
   const location = useLocation();
 
   useEffect(() => {
-    if (location.hash) {
-      const timer = setTimeout(() => {
-        document
-          .querySelector(location.hash)
-          ?.scrollIntoView({
-            behavior: "smooth",
-          });
-      }, 50);
+    const meta = routeMeta[location.pathname] || {
+      title: "Page not found | CoreAMP Engineering",
+      description: "Return to CoreAMP Engineering to explore our services.",
+    };
 
-      return () => clearTimeout(timer);
+    document.title = meta.title;
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", meta.description);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (location.hash) {
+      const timer = window.setTimeout(() => {
+        const rawId = location.hash.slice(1);
+        let id = rawId;
+
+        try {
+          id = decodeURIComponent(rawId);
+        } catch {
+          id = rawId;
+        }
+
+        document.getElementById(id)?.scrollIntoView({
+          behavior: reducedMotion ? "auto" : "smooth",
+          block: "start",
+        });
+      }, 80);
+
+      return () => window.clearTimeout(timer);
     }
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [location.pathname, location.hash]);
-
-  const openConsultation = () => {
-    setConsultationOpen(true);
-  };
-
-  const closeConsultation = () => {
-    setConsultationOpen(false);
-  };
 
   return (
     <div className="app-shell">
-      <Navbar
-        onConsult={openConsultation}
-      />
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
 
-      <main>
+      <Navbar onConsult={() => setConsultationOpen(true)} />
+
+      <main id="main-content" tabIndex="-1">
         <Routes>
           <Route
             path="/"
-            element={
-              <Home
-                onConsult={openConsultation}
-              />
-            }
+            element={<Home onConsult={() => setConsultationOpen(true)} />}
           />
-
-          <Route
-            path="/about"
-            element={
-              <About
-                onConsult={openConsultation}
-              />
-            }
-          />
-
-          <Route
-            path="/services"
-            element={
-              <Services
-                onConsult={openConsultation}
-              />
-            }
-          />
-
-          <Route
-            path="/electrical-design"
-            element={
-              <ElectricalDesign
-                onConsult={openConsultation}
-              />
-            }
-          />
-
-          <Route
-            path="/services/mep-design"
-            element={
-              <MepDesign
-                onConsult={openConsultation}
-              />
-            }
-          />
-
-          <Route
-            path="/projects"
-            element={
-              <Projects
-                onConsult={openConsultation}
-              />
-            }
-          />
-
-          <Route
-            path="/contact"
-            element={<Contact />}
-          />
-
-          <Route
-            path="/design"
-            element={
-              <Navigate
-                to="/electrical-design"
-                replace
-              />
-            }
-          />
-
-          <Route
-            path="*"
-            element={
-              <Navigate
-                to="/"
-                replace
-              />
-            }
-          />
+          <Route path="/services" element={<Navigate to="/#services" replace />} />
+          <Route path="/projects" element={<Navigate to="/#projects" replace />} />
+          <Route path="/about" element={<Navigate to="/#about" replace />} />
+          <Route path="/contact" element={<Navigate to="/#contact" replace />} />
+          <Route path="/electrical-design" element={<Navigate to="/#services" replace />} />
+          <Route path="/services/mep-design" element={<Navigate to="/#services" replace />} />
+          <Route path="/design" element={<Navigate to="/#services" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
 
       <Footer />
-
-      {/* AI Customer Assistant */}
-      <AIBot
-        onConsult={openConsultation}
-      />
-
-      {/* WhatsApp Floating Button */}
+      <AIBot onConsult={() => setConsultationOpen(true)} />
       <WhatsAppFloat />
-
-      {/* Consultation Modal */}
       <ConsultationModal
         open={consultationOpen}
-        onClose={closeConsultation}
+        onClose={() => setConsultationOpen(false)}
       />
     </div>
   );

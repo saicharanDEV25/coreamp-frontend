@@ -1,300 +1,255 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-
-import {
-  Link,
-  useLocation,
-} from "react-router-dom";
-
+import { ArrowUpRight, ChevronDown, Menu, X, Zap } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
-const HOME_SECTIONS = [
-  "home",
-  "services",
-  "electrical",
-  "mep",
-  "projects",
-  "about",
-  "contact",
+const navItems = [
+  { label: "Home", to: "/", section: "home" },
+  { label: "Services", to: "/#services", section: "services" },
+  { label: "Projects", to: "/#projects", section: "projects" },
+  { label: "About", to: "/#about", section: "about" },
+  { label: "Contact", to: "/#contact", section: "contact" },
 ];
 
-const PATH_SECTION_MAP = {
-  "/": "home",
-  "/services": "services",
-  "/electrical-design": "electrical",
-  "/services/mep-design": "mep",
-  "/projects": "projects",
-  "/about": "about",
-  "/contact": "contact",
-};
+const serviceMenu = [
+  {
+    label: "Electrical Design",
+    children: ["Power Distribution", "Single Line Diagrams", "Load Calculations", "Cable Sizing", "Grounding Design", "Lighting Design"],
+  },
+  { label: "Power System Studies", children: ["SKM Modeling", "Load Flow Analysis", "Short Circuit Analysis", "Protection Coordination", "Arc Flash Studies", "Harmonic Analysis"] },
+  { label: "MEP Coordination", children: ["HVAC Coordination", "Plumbing Coordination", "Fire & Life Safety", "Electrical Coordination", "Clash Detection", "Combined Services"] },
+  { label: "BIM Services", children: ["3D BIM Modeling", "BIM Coordination", "Clash Detection", "Scan to BIM", "Shop Drawings", "As-Built Models"] },
+  { label: "Lighting Engineering", children: ["Indoor Lighting", "Outdoor Lighting", "DIALux Calculations", "Emergency Lighting", "Lighting Controls", "Photometric Studies"] },
+  { label: "Critical Power", children: ["UPS Systems", "Backup Generators", "ATS Systems", "Critical Switchgear", "Redundancy Planning", "Mission-Critical Distribution"] },
+];
 
-export default function Navbar({
-  onConsult,
-}) {
+export default function Navbar({ onConsult }) {
   const location = useLocation();
-
-  const [activeSection, setActiveSection] =
-    useState("home");
-
+  const [activeSection, setActiveSection] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeService, setActiveService] = useState(0);
   const ticking = useRef(false);
 
   useEffect(() => {
-    /*
-      SEPARATE PAGE ACTIVE STATE
-    */
-    if (location.pathname !== "/") {
-      setActiveSection(
-        PATH_SECTION_MAP[
-          location.pathname
-        ] || ""
-      );
+    setMenuOpen(false);
 
-      return;
+    if (location.pathname === "/" && location.hash) {
+      setActiveSection(location.hash.slice(1));
     }
+  }, [location.pathname, location.hash]);
 
-    /*
-      HOME PAGE SCROLL SPY
-    */
-    const updateActiveSection = () => {
-      const navbarHeight = 92;
+  useEffect(() => {
+    document.body.classList.toggle("menu-locked", menuOpen);
 
-      /*
-        Viewport lo roughly upper 25%
-        daggara unna section active avuthundi.
-      */
-      const marker =
-        navbarHeight +
-        window.innerHeight * 0.24;
+    const handleEscape = (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
 
-      let current = "home";
+    window.addEventListener("keydown", handleEscape);
+    return () => {
+      document.body.classList.remove("menu-locked");
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [menuOpen]);
 
-      for (
-        let index = 0;
-        index < HOME_SECTIONS.length;
-        index += 1
-      ) {
-        const id =
-          HOME_SECTIONS[index];
+  useEffect(() => {
+    const updateNavigation = () => {
+      const scrollTop = window.scrollY;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
 
-        const element =
-          document.getElementById(id);
+      setScrolled(scrollTop > 28);
+      setScrollProgress(maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0);
 
-        if (!element) continue;
+      if (location.pathname === "/") {
+        const marker =
+          (window.innerWidth > 1050 ? 88 : 78) + window.innerHeight * 0.22;
+        let current = "home";
 
-        const rect =
-          element.getBoundingClientRect();
+        for (const item of navItems) {
+          const element = document.getElementById(item.section);
+          if (!element) continue;
 
-        /*
-          Marker section lopala unte
-          exact active section.
-        */
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= marker) current = item.section;
+          if (rect.top <= marker && rect.bottom > marker) break;
+        }
+
         if (
-          rect.top <= marker &&
-          rect.bottom > marker
+          document.documentElement.scrollHeight -
+            (window.innerHeight + window.scrollY) <
+          24
         ) {
-          current = id;
-          break;
+          current = "contact";
         }
 
-        /*
-          Marker section ni cross chesina
-          latest section remember chestham.
-        */
-        if (rect.top <= marker) {
-          current = id;
-        }
+        setActiveSection((previous) =>
+          previous === current ? previous : current
+        );
       }
-
-      /*
-        Page bottom ki reach ayithe
-        Contact compulsory active.
-      */
-      const pageBottom =
-        window.innerHeight +
-        window.scrollY;
-
-      const documentHeight =
-        document.documentElement
-          .scrollHeight;
-
-      if (
-        documentHeight -
-          pageBottom <
-        20
-      ) {
-        current = "contact";
-      }
-
-      setActiveSection(
-        (previous) =>
-          previous === current
-            ? previous
-            : current
-      );
 
       ticking.current = false;
     };
 
     const handleScroll = () => {
       if (ticking.current) return;
-
       ticking.current = true;
-
-      window.requestAnimationFrame(
-        updateActiveSection
-      );
+      window.requestAnimationFrame(updateNavigation);
     };
 
-    /*
-      Initial active state
-    */
-    updateActiveSection();
-
-    window.addEventListener(
-      "scroll",
-      handleScroll,
-      {
-        passive: true,
-      }
-    );
-
-    window.addEventListener(
-      "resize",
-      handleScroll
-    );
+    updateNavigation();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
-
-      window.removeEventListener(
-        "resize",
-        handleScroll
-      );
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, [location.pathname]);
 
+  const handleConsult = () => {
+    setMenuOpen(false);
+    onConsult();
+  };
+
   return (
-    <header className="navbar">
+    <header className={`navbar ${scrolled ? "is-scrolled" : ""}`}>
       <div className="container navbar-inner">
-
-        {/* BRAND */}
-        <Link
-          to="/"
-          className="navbar-brand"
-        >
-          <span className="navbar-logo-box">
-            CA
+        <Link to="/" className="navbar-brand" aria-label="CoreAMP home">
+          <span className="navbar-logo-box" aria-hidden="true">
+            <Zap size={20} strokeWidth={1.7} />
+            <i />
           </span>
-
           <span className="navbar-brand-text">
-            <strong>
-              COREAMP
-            </strong>
-
-            <small>
-              ENGINEERING
-            </small>
+            <strong>COREAMP</strong>
+            <small>ENGINEERING</small>
           </span>
         </Link>
 
-        {/* NAV */}
-        <nav className="navbar-links">
-          <Link
-            to="/"
-            className={`nav-link ${
-              activeSection === "home"
-                ? "active"
-                : ""
-            }`}
-          >
-            Home
-          </Link>
+        <nav
+          id="primary-navigation"
+          className={`navbar-links ${menuOpen ? "is-open" : ""}`}
+          aria-label="Primary navigation"
+        >
+          <div className="navbar-mobile-head">
+            <span>Navigate CoreAMP</span>
+            <button
+              type="button"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close navigation"
+            >
+              <X size={22} />
+            </button>
+          </div>
 
-          <Link
-            to="/services"
-            className={`nav-link ${
-              activeSection ===
-              "services"
-                ? "active"
-                : ""
-            }`}
-          >
-            Services
-          </Link>
+          {navItems.map((item, index) => {
+            const active = activeSection === item.section;
+            if (item.section === "services") {
+              return (
+                <div className="nav-services" key={item.to}>
+                  <Link
+                    to={item.to}
+                    className={`nav-link ${active ? "active" : ""}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <span className="nav-mobile-index">02</span>
+                    Services <ChevronDown className="nav-services-chevron" size={15} />
+                  </Link>
+                  <div className="nav-services-menu">
+                    <div className="nav-services-menu-head">
+                      <span>Engineering capabilities</span>
+                      <strong>Explore services</strong>
+                    </div>
+                    <div className="nav-services-grid">
+                      {serviceMenu.map((service, serviceIndex) => (
+                        <div
+                          className={`nav-service-item ${activeService === serviceIndex ? "is-active" : ""}`}
+                          key={service.label}
+                          onMouseEnter={() => setActiveService(serviceIndex)}
+                          onFocus={() => setActiveService(serviceIndex)}
+                        >
+                          <Link to="/#services" onClick={() => setMenuOpen(false)}>
+                            <span>{String(serviceIndex + 1).padStart(2, "0")}</span>
+                            {service.label}
+                            <ArrowUpRight size={14} />
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="nav-service-flyout">
+                      <small>{serviceMenu[activeService].label}</small>
+                      <strong>Related capabilities</strong>
+                      {serviceMenu[activeService].children.map((child) => (
+                        <Link key={child} to="/#services" onClick={() => setMenuOpen(false)}>
+                          {child}<ArrowUpRight size={13} />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`nav-link ${active ? "active" : ""}`}
+                aria-current={active && location.pathname === "/" ? "page" : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
+                <span className="nav-mobile-index">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {item.label}
+              </Link>
+            );
+          })}
 
-          <Link
-            to="/electrical-design"
-            className={`nav-link ${
-              activeSection ===
-              "electrical"
-                ? "active"
-                : ""
-            }`}
+          <button
+            type="button"
+            className="navbar-mobile-consult"
+            onClick={handleConsult}
           >
-            Electrical
-          </Link>
-
-          <Link
-            to="/services/mep-design"
-            className={`nav-link ${
-              activeSection === "mep"
-                ? "active"
-                : ""
-            }`}
-          >
-            MEP
-          </Link>
-
-          <Link
-            to="/projects"
-            className={`nav-link ${
-              activeSection ===
-              "projects"
-                ? "active"
-                : ""
-            }`}
-          >
-            Projects
-          </Link>
-
-          <Link
-            to="/about"
-            className={`nav-link ${
-              activeSection === "about"
-                ? "active"
-                : ""
-            }`}
-          >
-            About
-          </Link>
-
-          <Link
-            to="/contact"
-            className={`nav-link ${
-              activeSection ===
-              "contact"
-                ? "active"
-                : ""
-            }`}
-          >
-            Contact
-          </Link>
+            Start a project <ArrowUpRight size={17} />
+          </button>
         </nav>
 
         <button
           type="button"
           className="navbar-consult"
-          onClick={onConsult}
+          onClick={handleConsult}
         >
-          Book Consultation
+          Book Consultation <ArrowUpRight size={15} />
+        </button>
+
+        <button
+          type="button"
+          className="navbar-menu-toggle"
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? <X size={21} /> : <Menu size={21} />}
         </button>
       </div>
+
+      <span
+        className="navbar-progress"
+        style={{ transform: `scaleX(${scrollProgress / 100})` }}
+        aria-hidden="true"
+      />
+
+      {menuOpen && (
+        <button
+          type="button"
+          className="navbar-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Close navigation"
+        />
+      )}
     </header>
   );
 }

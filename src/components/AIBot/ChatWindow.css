@@ -1,4 +1,4 @@
-.coreamp-chat-window {
+﻿.coreamp-chat-window {
   position: fixed;
   right: 28px;
   bottom: 182px;
@@ -11,16 +11,16 @@
 
   background: #111317;
 
-  border: 1px solid rgba(211, 170, 98, 0.24);
+  border: 1px solid rgba(20, 184, 166, 0.24);
   border-radius: 20px;
 
   overflow: hidden;
 
-  z-index: 9998;
+  z-index: 950;
 
   box-shadow:
     0 30px 80px rgba(0, 0, 0, 0.6),
-    0 0 40px rgba(211, 170, 98, 0.05);
+    0 0 40px rgba(20, 184, 166, 0.05);
 
   animation: chatWindowOpen 0.28s ease;
 }
@@ -79,14 +79,14 @@
     linear-gradient(
       145deg,
       #e1bd75,
-      #b98b45
+      var(--accent)
     );
 
   color: #111;
 
   box-shadow:
     0 5px 18px
-    rgba(211, 170, 98, 0.2);
+    rgba(20, 184, 166, 0.2);
 }
 
 .chat-header h4 {
@@ -160,14 +160,14 @@
   background:
     radial-gradient(
       circle at top right,
-      rgba(211, 170, 98, 0.07),
+      rgba(20, 184, 166, 0.07),
       transparent 34%
     ),
     #111317;
 
   scrollbar-width: thin;
   scrollbar-color:
-    rgba(211, 170, 98, 0.25)
+    rgba(20, 184, 166, 0.25)
     transparent;
 }
 
@@ -177,7 +177,7 @@
 
 .chat-body::-webkit-scrollbar-thumb {
   background:
-    rgba(211, 170, 98, 0.25);
+    rgba(20, 184, 166, 0.25);
 
   border-radius: 20px;
 }
@@ -216,7 +216,7 @@
 .guided-input-wrapper svg {
   flex-shrink: 0;
 
-  color: #d3aa62;
+  color: var(--accent);
 }
 
 .guided-input-wrapper input {
@@ -251,7 +251,7 @@
   border: none;
   border-radius: 9px;
 
-  background: #d3aa62;
+  background: var(--accent);
 
   color: #111;
 
@@ -265,6 +265,10 @@
 
   transform:
     translateY(-1px);
+}
+
+.guided-input-wrapper .guided-send-button svg {
+  color: #111;
 }
 
 /* CONTACT FORM */
@@ -285,7 +289,7 @@
     );
 
   border: 1px solid
-    rgba(211, 170, 98, 0.18);
+    rgba(20, 184, 166, 0.18);
 
   border-radius: 14px;
 }
@@ -324,13 +328,13 @@
 
 .contact-input-wrapper:focus-within {
   border-color:
-    rgba(211, 170, 98, 0.55);
+    rgba(20, 184, 166, 0.55);
 }
 
 .contact-input-wrapper svg {
   flex-shrink: 0;
 
-  color: #d3aa62;
+  color: var(--accent);
 }
 
 .contact-input-wrapper input {
@@ -388,7 +392,7 @@
 
   box-shadow:
     0 8px 20px
-    rgba(211, 170, 98, 0.16);
+    rgba(20, 184, 166, 0.16);
 }
 
 /* SERVICE & REQUIREMENT OPTIONS */
@@ -416,12 +420,12 @@
   gap: 10px;
 
   border: 1px solid
-    rgba(211, 170, 98, 0.18);
+    rgba(20, 184, 166, 0.18);
 
   border-radius: 11px;
 
   background:
-    rgba(211, 170, 98, 0.045);
+    rgba(20, 184, 166, 0.045);
 
   color: #d7d9dc;
 
@@ -436,10 +440,10 @@
 
 .guided-option-button:hover {
   border-color:
-    rgba(211, 170, 98, 0.55);
+    rgba(20, 184, 166, 0.55);
 
   background:
-    rgba(211, 170, 98, 0.11);
+    rgba(20, 184, 166, 0.11);
 
   color: #fff;
 
@@ -460,9 +464,9 @@
   border-radius: 8px;
 
   background:
-    rgba(211, 170, 98, 0.12);
+    rgba(20, 184, 166, 0.12);
 
-  color: #d3aa62;
+  color: var(--accent);
 }
 
 .requirement-options {
@@ -482,11 +486,11 @@
 
   border-radius: 50%;
 
-  background: #d3aa62;
+  background: var(--accent);
 
   box-shadow:
     0 0 7px
-    rgba(211, 170, 98, 0.5);
+    rgba(20, 184, 166, 0.5);
 }
 
 /* FINAL CONTACT CARD */
@@ -507,7 +511,7 @@
     );
 
   border: 1px solid
-    rgba(211, 170, 98, 0.2);
+    rgba(20, 184, 166, 0.2);
 
   border-radius: 14px;
 }
@@ -529,7 +533,7 @@
 
   text-transform: uppercase;
 
-  letter-spacing: 0.9px;
+  letter-spacing: 0;
 }
 
 .chat-contact-summary strong {
@@ -622,7 +626,7 @@
 }
 
 .chat-back-button:hover {
-  color: #d3aa62;
+  color: var(--accent);
 }
 
 /* FOOTER */

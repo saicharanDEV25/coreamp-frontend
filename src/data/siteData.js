@@ -88,12 +88,12 @@ export const mepItems = [
 ];
 
 export const services = [
-  { icon: Zap, title: 'Electrical Design', text: 'Power distribution, SLDs, load calculations, equipment sizing, cable routing, grounding and lighting.', path: '/electrical-design' },
-  { icon: Network, title: 'Power System Studies', text: 'SKM modeling, load flow, short circuit, protection coordination and arc-flash studies.', path: '/electrical-design#studies' },
-  { icon: Wind, title: 'MEP Design & Coordination', text: 'Integrated mechanical, electrical, plumbing, fire and low-current engineering.', path: '/services/mep-design' },
-  { icon: ShieldCheck, title: 'Engineering Review', text: 'Design review, coordination, technical checks and constructability-focused support.', path: '/services' },
-  { icon: Lightbulb, title: 'Lighting Engineering', text: 'Indoor and outdoor lighting planning, calculations and coordination.', path: '/electrical-design' },
-  { icon: Cable, title: 'Critical Power & Distribution', text: 'Transformers, UPS, generators, switchgear and distribution strategy for reliable systems.', path: '/electrical-design' },
+  { icon: Zap, title: 'Electrical Design', text: 'Power distribution, SLDs, load calculations, equipment sizing, cable routing, grounding and lighting.', image: '/images/services/electrical-design.png', path: '/#contact' },
+  { icon: Network, title: 'Power System Studies', text: 'SKM modeling, load flow, short circuit, protection coordination and arc-flash studies.', image: '/images/services/power-system-studies.png', path: '/#contact' },
+  { icon: Wind, title: 'MEP Design & Coordination', text: 'Integrated mechanical, electrical, plumbing, fire and low-current engineering.', image: '/images/services/mep-coordination.png', path: '/#contact' },
+  { icon: Building2, title: 'BIM Services', text: 'Coordinated BIM models, clash detection, multidisciplinary integration and construction-ready documentation.', image: '/images/services/bim-services.png', path: '/#contact' },
+  { icon: Lightbulb, title: 'Lighting Engineering', text: 'Indoor and outdoor lighting planning, calculations and coordination.', image: '/images/services/lighting-engineering.png', path: '/#contact' },
+  { icon: Cable, title: 'Critical Power & Distribution', text: 'Transformers, UPS, generators, switchgear and distribution strategy for reliable systems.', image: '/images/services/critical-power.png', path: '/#contact' },
 ];
 
 export const projects = [

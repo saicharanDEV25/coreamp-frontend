@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -44,16 +44,25 @@ const cardVariants = {
 export default function Services({
   onConsult,
 }) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <main className="services-page">
+    <div className="services-page">
       {/* HERO */}
       <section className="services-page-hero">
-        <div className="services-page-grid" />
-        <div className="services-page-glow" />
+        <div
+          className="services-page-grid"
+          aria-hidden="true"
+        />
+        <div
+          className="services-page-glow"
+          aria-hidden="true"
+        />
 
         <div className="container services-page-hero-inner">
           <motion.div
-            initial={{
+            className="services-page-hero-copy"
+            initial={reduceMotion ? false : {
               opacity: 0,
               y: 45,
             }}
@@ -97,6 +106,40 @@ export default function Services({
               <ArrowRight size={18} />
             </button>
           </motion.div>
+
+          <motion.ol
+            className="services-page-process"
+            aria-label="Core engineering workflow"
+            initial={reduceMotion ? false : { opacity: 0, x: 28 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+              duration: 0.9,
+              delay: 0.35,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <li>
+              <span>01</span>
+              <div>
+                <strong>Design</strong>
+                <small>Electrical systems</small>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <strong>Study</strong>
+                <small>Network performance</small>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <strong>Coordinate</strong>
+                <small>Integrated MEP</small>
+              </div>
+            </li>
+          </motion.ol>
         </div>
       </section>
 
@@ -105,7 +148,7 @@ export default function Services({
         <div className="container">
           <motion.div
             className="services-page-heading"
-            initial={{
+            initial={reduceMotion ? false : {
               opacity: 0,
               y: 35,
             }}
@@ -131,7 +174,7 @@ export default function Services({
           <motion.div
             className="services-page-grid-cards"
             variants={containerVariants}
-            initial="hidden"
+            initial={reduceMotion ? false : "hidden"}
             whileInView="visible"
             viewport={{
               once: true,
@@ -160,7 +203,7 @@ export default function Services({
       <section className="services-focus-section">
         <div className="container services-focus-grid">
           <motion.div
-            initial={{
+            initial={reduceMotion ? false : {
               opacity: 0,
               x: -40,
             }}
@@ -193,17 +236,18 @@ export default function Services({
             </p>
 
             <Link
-              to="/electrical-design"
+              to="/#services"
               className="services-focus-link"
             >
-              Explore Electrical Design
+              View Services
               <ArrowRight size={17} />
             </Link>
           </motion.div>
 
-          <motion.div
+          <motion.ol
             className="services-focus-list"
-            initial={{
+            aria-label="Electrical design scope"
+            initial={reduceMotion ? false : {
               opacity: 0,
               x: 40,
             }}
@@ -227,7 +271,7 @@ export default function Services({
               "Grounding & Bonding",
               "Lighting Design",
             ].map((item, index) => (
-              <div key={item}>
+              <li key={item}>
                 <span>
                   {String(index + 1).padStart(
                     2,
@@ -236,9 +280,9 @@ export default function Services({
                 </span>
 
                 <p>{item}</p>
-              </div>
+              </li>
             ))}
-          </motion.div>
+          </motion.ol>
         </div>
       </section>
 
@@ -265,6 +309,6 @@ export default function Services({
           </button>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

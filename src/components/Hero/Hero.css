@@ -1,113 +1,197 @@
-.hero {
-  min-height: 100vh;
-  background: #080a0b;
-  color: #fff;
+﻿.hero {
   position: relative;
+  min-height: max(650px, 96svh);
+  padding: calc(var(--nav-height) + 82px) 0 78px;
   display: flex;
   align-items: center;
   overflow: hidden;
+  background: #0b0d10;
+  color: #ffffff;
+  scroll-margin-top: var(--nav-height);
 }
-.hero-media {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(3,5,6,.95) 9%, rgba(3,5,6,.73) 50%, rgba(3,5,6,.34)),
-    url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=90') center/cover;
-}
-.hero-grid-overlay {
+
+.hero-backdrop {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: linear-gradient(to right, black, transparent 78%);
+    linear-gradient(90deg, rgba(17, 15, 13, .96) 0%, rgba(17, 15, 13, .82) 38%, rgba(17, 15, 13, .16) 72%, rgba(17, 15, 13, .04) 100%),
+    linear-gradient(180deg, rgba(17, 15, 13, .02) 52%, rgba(17, 15, 13, .7) 100%),
+    url('/images/coreamp-hero-v3.png');
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
 }
-.hero-power-line {
-  position: absolute;
-  height: 1px;
-  width: 440px;
-  background: linear-gradient(90deg, transparent, rgba(201,166,107,.7), transparent);
-  opacity: .45;
-  animation: powerSweep 6s linear infinite;
-}
-.hero-power-line-one { right: 3%; top: 35%; transform: rotate(-32deg); }
-.hero-power-line-two { right: 12%; top: 68%; transform: rotate(18deg); animation-delay: -2.8s; }
-@keyframes powerSweep { 0%,100% { opacity:.1; filter: blur(0); } 50% { opacity:.7; filter: drop-shadow(0 0 8px #c9a66b); } }
+
+.hero-backdrop::before { display: none; }
+
 .hero-content {
   position: relative;
   z-index: 2;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding-top: 80px;
 }
-.hero-copy { max-width: 930px; }
+
+.hero-copy {
+  max-width: 900px;
+}
+
 .hero h1 {
-  font-size: clamp(64px, 8.8vw, 138px);
-  line-height: .82;
-  letter-spacing: -.065em;
-  margin: 22px 0 30px;
-  font-weight: 500;
+  max-width: 900px;
+  margin: 22px 0 28px;
+  color: #ffffff;
+  font-size: clamp(72px, 7vw, 98px);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 0.92;
 }
-.hero h1 em { font-family: 'Playfair Display', serif; color: var(--gold); font-weight: 600; }
-.hero-copy > p { max-width: 720px; font-size: 18px; line-height: 1.7; color: #d0d1d1; }
-.hero-actions { display: flex; gap: 12px; margin-top: 35px; }
-.hero-side-note {
-  border-left: 1px solid rgba(255,255,255,.25);
-  padding: 0 0 0 20px;
-  margin-bottom: 45px;
-  min-width: 230px;
+
+.hero h1 em {
+  display: inline-block;
+  color: #d8bd84;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0;
 }
-.hero-side-note svg { color: var(--gold); margin-bottom: 16px; }
-.hero-side-note span { color: var(--gold); font-size: 10px; letter-spacing: .16em; }
-.hero-side-note p { font-size: 12px; line-height: 1.9; color: #b9b9b9; }
+
+.hero-copy > p {
+  max-width: 690px;
+  margin: 0;
+  color: #d4dfed;
+  font-size: 19px;
+  line-height: 1.75;
+}
+
+.hero-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-actions .btn {
+  min-width: 178px;
+}
+
+.hero .btn-outline {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  background: rgba(5, 18, 37, 0.38);
+}
+
+.hero .btn-outline:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, .12);
+}
+
+.hero-proof {
+  max-width: 690px;
+  margin-top: 36px;
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.hero-proof-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #d4dfed;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.hero-proof-item svg {
+  flex: 0 0 auto;
+  color: var(--accent);
+}
+
 .scroll-label {
   position: absolute;
   right: 24px;
-  bottom: 30px;
-  font-size: 9px;
-  letter-spacing: .25em;
-  color: #aaa;
+  bottom: 42px;
+  z-index: 3;
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0;
   transform: rotate(90deg);
   transform-origin: right bottom;
 }
-.scroll-label span { width: 55px; height: 1px; background: #777; }
 
-@media (max-width: 900px) {
-  .hero { min-height: 92vh; }
-  .hero-content { align-items: flex-start; }
-  .hero h1 { font-size: clamp(58px, 17vw, 94px); margin-top: 18px; }
-  .hero-copy > p { font-size: 15px; }
-  .hero-side-note, .scroll-label { display: none; }
-}
-@media (max-width: 580px) {
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-actions .btn { width: 100%; }
-  .hero h1 { font-size: 58px; }
-}
-.hero-copy,
-.hero-media,
-.hero-grid-overlay {
-  will-change: transform, opacity;
+.scroll-label span {
+  width: 48px;
+  height: 1px;
+  background: currentColor;
 }
 
-.hero h1 em {
-  display: inline-block;
-}
-#home {
-  scroll-margin-top: 85px;
+@media (max-width: 760px) {
+  .hero {
+    min-height: 690px;
+    padding: calc(var(--nav-height) + 48px) 0 46px;
+  }
+
+  .hero-backdrop {
+    background-image:
+      linear-gradient(180deg, rgba(17, 15, 13, .4), rgba(17, 15, 13, .94) 66%),
+      url('/images/coreamp-hero-v3.png');
+    background-position: 64% center;
+  }
+
+  .hero h1 {
+    margin: 18px 0 24px;
+    font-size: 56px;
+    line-height: 1.02;
+  }
+
+  .hero-copy > p {
+    max-width: 330px;
+    color: #d4dfed;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    margin-top: 29px;
+  }
+
+  .hero-actions .btn {
+    min-width: 0;
+  }
+
+  .hero-proof {
+    margin-top: 28px;
+  }
+
+  .scroll-label {
+    display: none;
+  }
 }
 
-.hero-copy,
-.hero-media,
-.hero-grid-overlay {
-  will-change: transform, opacity;
+@media (max-width: 420px) {
+  .hero h1 {
+    font-size: 45px;
+  }
+
+  .hero-copy > p {
+    max-width: 310px;
+  }
 }
 
-.hero h1 em {
-  display: inline-block;
+@media (max-width: 520px) {
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .hero-proof-item {
+    width: 100%;
+  }
 }
