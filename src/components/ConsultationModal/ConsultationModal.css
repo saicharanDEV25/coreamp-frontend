@@ -1,0 +1,11 @@
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.78); z-index: 100; display: grid; place-items: center; padding: 20px; backdrop-filter: blur(8px); }
+.modal { width: min(680px,100%); background: #f5f1e8; padding: 42px; position: relative; box-shadow: 0 30px 90px rgba(0,0,0,.35); }
+.modal h2 { font-size: 42px; margin: 10px 0; letter-spacing: -.035em; }
+.modal p { color: #666; line-height: 1.7; }
+.modal-close { position: absolute; right: 18px; top: 18px; border: 0; background: none; cursor: pointer; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-grid input,.form-grid textarea,.form-grid select { width: 100%; border: 1px solid #d7d2c8; background: #fff; padding: 15px; outline: none; }
+.form-grid input:focus,.form-grid textarea:focus,.form-grid select:focus { border-color: #a78550; }
+.form-grid textarea { grid-column: 1 / -1; }
+.form-grid .btn { grid-column: 1 / -1; }
+@media(max-width:580px){.modal{padding:32px 20px}.form-grid{grid-template-columns:1fr}.form-grid textarea,.form-grid .btn{grid-column:auto}.modal h2{font-size:34px}}

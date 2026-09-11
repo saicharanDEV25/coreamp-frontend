@@ -1,0 +1,9 @@
+.mep-overview-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-left: 1px solid rgba(255,255,255,.12); border-top: 1px solid rgba(255,255,255,.12); }
+.mep-overview-card { position: relative; padding: 34px; min-height: 245px; border-right: 1px solid rgba(255,255,255,.12); border-bottom: 1px solid rgba(255,255,255,.12); transition: background .3s ease; }
+.mep-overview-card:hover { background: rgba(201,166,107,.055); }
+.mep-overview-card svg { color: var(--gold); }
+.mep-overview-card > span { position: absolute; top: 30px; right: 28px; color: #5f6467; font-size: 9px; letter-spacing: .14em; }
+.mep-overview-card h3 { margin: 42px 0 12px; font-size: 20px; }
+.mep-overview-card p { margin: 0; color: #93999b; font-size: 13px; line-height: 1.7; }
+@media (max-width: 900px) { .mep-overview-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .mep-overview-grid { grid-template-columns: 1fr; } }

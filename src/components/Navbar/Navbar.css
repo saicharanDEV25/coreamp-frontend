@@ -1,0 +1,512 @@
+/* =========================================
+   COREAMP NAVBAR
+========================================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  height: 92px;
+
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+
+  background: rgba(8, 10, 12, 0.94);
+
+  border-bottom: 1px solid
+    rgba(255, 255, 255, 0.07);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* =========================================
+   INNER
+========================================= */
+
+.navbar-inner {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+/* =========================================
+   BRAND
+========================================= */
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  text-decoration: none;
+}
+
+.navbar-logo-box {
+  width: 47px;
+  height: 47px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid
+    rgba(211, 170, 98, 0.75);
+
+  background:
+    rgba(211, 170, 98, 0.03);
+
+  color: #d3aa62;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.navbar-brand:hover
+.navbar-logo-box {
+  background: #d3aa62;
+  color: #111317;
+
+  transform: translateY(-1px);
+}
+
+.navbar-brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  line-height: 1;
+}
+
+.navbar-brand-text strong {
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.navbar-brand-text small {
+  margin-top: 7px;
+
+  color: #8e9297;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 3.4px;
+}
+
+/* =========================================
+   NAV LINKS
+========================================= */
+
+.navbar-links {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+}
+
+.navbar-links .nav-link {
+  position: relative;
+
+  padding: 8px 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #c3c5c7;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.navbar-links .nav-link::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -6px;
+
+  width: 100%;
+  height: 1px;
+
+  background: #d3aa62;
+
+  transform: scaleX(0);
+  transform-origin: left center;
+
+  transition:
+    transform 0.3s ease;
+}
+
+.navbar-links .nav-link:hover {
+  color: #ffffff;
+}
+
+.navbar-links .nav-link:hover::after {
+  transform: scaleX(0.45);
+}
+
+.navbar-links .nav-link.active {
+  color: #d3aa62;
+}
+
+.navbar-links
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* =========================================
+   CONSULTATION BUTTON
+========================================= */
+
+.navbar-consult {
+  min-width: 168px;
+  height: 49px;
+
+  margin-left: 2px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 23px;
+
+  border: 1px solid #d3aa62;
+  outline: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d9b56d,
+      #c69b55
+    );
+
+  color: #111317;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.navbar-consult:hover {
+  transform: translateY(-2px);
+
+  background:
+    linear-gradient(
+      135deg,
+      #e4c37d,
+      #d3aa62
+    );
+
+  box-shadow:
+    0 12px 30px
+    rgba(211, 170, 98, 0.17);
+}
+
+/* =========================================
+   HERO OFFSET
+========================================= */
+
+.hero {
+  padding-top: 92px;
+}
+
+/* =========================================
+   SECTION SCROLL OFFSET
+========================================= */
+
+#home,
+#services,
+#electrical,
+#mep,
+#projects {
+  scroll-margin-top: 92px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+  .navbar-links {
+    gap: 20px;
+  }
+
+  .navbar-links .nav-link {
+    font-size: 12px;
+  }
+
+  .navbar-consult {
+    min-width: 150px;
+
+    padding: 0 17px;
+
+    font-size: 12px;
+  }
+
+  .navbar-brand-text strong {
+    font-size: 14px;
+
+    letter-spacing: 2.5px;
+  }
+}
+
+/* =========================================
+   SMALL LAPTOP / TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .navbar {
+    height: auto;
+
+    min-height: 82px;
+
+    padding: 15px 0;
+  }
+
+  .navbar-inner {
+    flex-wrap: wrap;
+
+    row-gap: 14px;
+  }
+
+  .navbar-links {
+    order: 3;
+
+    width: 100%;
+
+    margin-left: 0;
+
+    justify-content: center;
+
+    gap: 24px;
+
+    padding-top: 12px;
+
+    border-top:
+      1px solid
+      rgba(255, 255, 255, 0.06);
+  }
+
+  .hero {
+    padding-top: 135px;
+  }
+
+  #home,
+  #services,
+  #electrical,
+  #mep,
+  #projects {
+    scroll-margin-top: 135px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+  .navbar {
+    position: fixed;
+
+    padding: 12px 0;
+  }
+
+  .navbar-inner {
+    gap: 12px;
+  }
+
+  .navbar-logo-box {
+    width: 42px;
+    height: 42px;
+
+    font-size: 11px;
+  }
+
+  .navbar-brand-text strong {
+    font-size: 13px;
+
+    letter-spacing: 2px;
+  }
+
+  .navbar-brand-text small {
+    margin-top: 5px;
+
+    font-size: 7px;
+
+    letter-spacing: 2.5px;
+  }
+
+  .navbar-consult {
+    min-width: auto;
+    height: 42px;
+
+    padding: 0 13px;
+
+    font-size: 10px;
+  }
+
+  .navbar-links {
+    justify-content: flex-start;
+
+    gap: 22px;
+
+    overflow-x: auto;
+
+    padding:
+      12px 2px
+      4px;
+
+    scrollbar-width: none;
+  }
+
+  .navbar-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navbar-links .nav-link {
+    flex-shrink: 0;
+
+    font-size: 11px;
+  }
+
+  .navbar-links
+  .nav-link::after {
+    bottom: -4px;
+  }
+
+  .hero {
+    padding-top: 132px;
+  }
+
+  #home,
+  #services,
+  #electrical,
+  #mep,
+  #projects {
+    scroll-margin-top: 132px;
+  }
+}
+/* =========================================
+   SCROLL SPY ACTIVE STATE - IMPORTANT
+========================================= */
+
+.navbar .navbar-links .nav-link {
+  position: relative;
+
+  color: #c3c5c7;
+
+  text-decoration: none;
+
+  transition:
+    color 0.3s ease;
+}
+
+.navbar .navbar-links .nav-link::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -10px;
+
+  width: 100%;
+  height: 2px;
+
+  background: #d3aa62;
+
+  transform: scaleX(0);
+
+  transform-origin: center;
+
+  opacity: 0;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.navbar .navbar-links .nav-link:hover {
+  color: #ffffff;
+}
+
+.navbar .navbar-links .nav-link.active {
+  color: #d3aa62 !important;
+}
+
+.navbar
+  .navbar-links
+  .nav-link.active::after {
+  transform: scaleX(1) !important;
+
+  opacity: 1 !important;
+}

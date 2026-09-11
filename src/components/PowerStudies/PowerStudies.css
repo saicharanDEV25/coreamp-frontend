@@ -1,0 +1,20 @@
+.power-study-list { border-top: 1px solid rgba(255,255,255,.13); }
+.power-study-row {
+  display: grid;
+  grid-template-columns: 50px 52px 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: 25px 0;
+  border-bottom: 1px solid rgba(255,255,255,.13);
+  transition: padding .25s ease, background .25s ease;
+}
+.power-study-row:hover { padding-left: 14px; background: linear-gradient(90deg, rgba(201,166,107,.07), transparent); }
+.power-study-number { font-size: 10px; color: #74797c; letter-spacing: .13em; }
+.power-study-row > svg { color: var(--gold); }
+.power-study-row h3 { margin: 0 0 6px; font-size: 19px; }
+.power-study-row p { margin: 0; color: #92989a; font-size: 13px; }
+.power-study-level { color: #d8c19a; font-size: 9px; text-transform: uppercase; letter-spacing: .14em; border: 1px solid rgba(201,166,107,.28); padding: 7px 9px; }
+@media (max-width: 580px) {
+  .power-study-row { grid-template-columns: 34px 36px 1fr; gap: 10px; }
+  .power-study-level { grid-column: 3; justify-self: start; margin-top: 5px; }
+}

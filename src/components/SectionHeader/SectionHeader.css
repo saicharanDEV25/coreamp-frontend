@@ -1,0 +1,11 @@
+.section-header { max-width: 760px; margin-bottom: 48px; }
+.section-header.center { margin-left: auto; margin-right: auto; text-align: center; }
+.section-header h2 {
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -.045em;
+  font-weight: 500;
+  margin: 16px 0 0;
+}
+.section-header p { font-size: 15px; line-height: 1.8; color: #6b7073; margin: 20px 0 0; }
+.section-dark .section-header p { color: #9ea3a6; }

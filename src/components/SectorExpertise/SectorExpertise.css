@@ -1,0 +1,17 @@
+.sector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: start; }
+.sector-card { background: #fff; border: 1px solid rgba(0,0,0,.07); padding: 28px; min-height: 245px; }
+.sector-card-head { display: flex; align-items: center; gap: 13px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.sector-card-head svg { color: #9b7843; }
+.sector-card-head h3 { margin: 0; font-size: 19px; }
+.sector-skills { margin-top: 10px; }
+.sector-skill { display: flex; justify-content: space-between; gap: 15px; align-items: center; padding: 11px 0; border-bottom: 1px solid rgba(0,0,0,.07); font-size: 12px; color: #54595c; }
+.sector-skill:last-child { border-bottom: 0; }
+.level-bars { display: inline-flex; align-items: end; gap: 2px; height: 15px; min-width: 29px; }
+.level-bars i { display: block; width: 4px; background: #ded8cd; }
+.level-bars i:nth-child(1) { height: 5px; }
+.level-bars i:nth-child(2) { height: 8px; }
+.level-bars i:nth-child(3) { height: 11px; }
+.level-bars i:nth-child(4) { height: 14px; }
+.level-bars i.active { background: #8f7041; }
+@media (max-width: 900px) { .sector-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .sector-grid { grid-template-columns: 1fr; } }

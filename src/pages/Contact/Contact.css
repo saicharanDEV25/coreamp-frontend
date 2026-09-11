@@ -1,0 +1,11 @@
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:90px; }
+.contact-list { margin-top:35px; }
+.contact-list>div { display:flex; gap:15px; padding:18px 0; border-bottom:1px solid var(--line); }
+.contact-list svg { color:#8b6d3f; }
+.contact-list span,.contact-list strong { display:block; }
+.contact-list span { font-size:13px; color:#555; }
+.contact-list strong { color:#111; margin-bottom:5px; }
+.contact-form { display:grid; gap:12px; }
+.contact-form input,.contact-form textarea,.contact-form select { width:100%; border:1px solid #d7d2c8; background:#fff; padding:15px; outline:none; }
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus { border-color:#a78550; }
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:35px}}

@@ -1,0 +1,10 @@
+.about-body { color:#666; line-height:1.8; }
+.about-head { max-width:820px; margin-bottom:48px; }
+.about-feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.about-feature-card { background:#fff; padding:34px; min-height:230px; border:1px solid rgba(0,0,0,.06); transition:transform .3s ease,border-color .3s ease; }
+.about-feature-card:hover { transform:translateY(-4px); border-color:rgba(201,166,107,.5); }
+.about-feature-card svg { color:#9b7843; }
+.about-feature-card h3 { font-size:20px; margin:35px 0 12px; }
+.about-feature-card p { font-size:13px; line-height:1.7; color:#666; }
+@media(max-width:900px){.about-feature-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.about-feature-grid{grid-template-columns:1fr}}

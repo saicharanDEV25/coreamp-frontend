@@ -1,0 +1,5 @@
+.electrical-copy { color:#666; line-height:1.8; }
+.electrical-deliverable-list { border-top:1px solid var(--line); }
+.electrical-deliverable-list div { display:flex; align-items:center; gap:14px; padding:18px 0; border-bottom:1px solid var(--line); }
+.electrical-deliverable-list svg { color:#8b6d3f; flex:0 0 auto; }
+.electrical-deliverable-list span { font-size:14px; }

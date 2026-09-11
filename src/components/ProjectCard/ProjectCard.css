@@ -1,0 +1,17 @@
+.project-card { height: 440px; position: relative; overflow: hidden; background: #222; }
+.project-card.wide { grid-row: span 2; height: 898px; }
+.project-card img { width: 100%; height: 100%; object-fit: cover; transition: .7s ease; }
+.project-card:hover img { transform: scale(1.05); }
+.project-overlay {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 90px 28px 26px;
+  background: linear-gradient(transparent, rgba(0,0,0,.86));
+  color: #fff;
+}
+.project-overlay > span { font-size: 10px; text-transform: uppercase; letter-spacing: .2em; color: #d6c09c; }
+.project-overlay h3 { font-size: 27px; margin: 8px 0 0; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.project-tags small { border: 1px solid rgba(255,255,255,.28); padding: 5px 8px; font-size: 9px; color: #ddd; }
+@media (max-width: 900px) { .project-card.wide { height: 440px; grid-row: auto; } }
+@media (max-width: 580px) { .project-card { height: 360px; } }

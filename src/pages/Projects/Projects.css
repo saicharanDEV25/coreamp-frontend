@@ -1,0 +1,7 @@
+.filter-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+.filter-row button { border:1px solid var(--line); background:transparent; padding:10px 16px; cursor:pointer; transition:.25s ease; }
+.filter-row button:hover,.filter-row button.active { background:#111; color:#fff; }
+.projects-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.projects-grid .project-card { height:390px; }
+@media(max-width:900px){.projects-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.projects-grid{grid-template-columns:1fr}.projects-grid .project-card{height:360px}}

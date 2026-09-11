@@ -1,26 +1,25 @@
-# CoreAmp Frontend
+# CoreAmp Engineering Frontend
 
-Premium engineering / MEP / architecture / interior website starter built with React + Vite.
+React + Vite frontend focused on Electrical Engineering, Power System Studies and MEP Design & Coordination.
 
-## Run in VS Code
+## Run
 
-1. Open this folder in VS Code.
-2. Open Terminal (`Ctrl + backtick`).
-3. Run:
-   ```bash
-   npm install
-   npm run dev
-   ```
-4. Open the localhost URL shown by Vite (usually http://localhost:5173).
+```bash
+npm install
+npm run dev
+```
 
-## Main routes
-- `/` Home
-- `/about`
-- `/services`
-- `/services/mep-design`
-- `/projects`
-- `/design`
-- `/contact`
+## Build
 
-## Next phase
-Connect consultation/contact forms to Java Spring Boot REST APIs and PostgreSQL.
+```bash
+npm run build
+```
+
+## Structure
+
+Each reusable component has its own folder with JSX + CSS, for example:
+
+`src/components/Hero/Hero.jsx`
+`src/components/Hero/Hero.css`
+
+Pages are also separated into their own JSX + CSS folders.
