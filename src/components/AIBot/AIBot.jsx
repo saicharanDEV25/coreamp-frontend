@@ -6,15 +6,12 @@ import "./AIBot.css";
 
 export default function AIBot({ onConsult }) {
   const [open, setOpen] = useState(false);
-
-  // Every refresh lo popup visible ga start avutundi
   const [showHint, setShowHint] = useState(true);
 
   useEffect(() => {
-    // 10 seconds visible
     const hideTimer = window.setTimeout(() => {
       setShowHint(false);
-    }, 10000);
+    }, 8000);
 
     return () => {
       window.clearTimeout(hideTimer);
@@ -33,7 +30,6 @@ export default function AIBot({ onConsult }) {
 
   return (
     <>
-      {/* CHAT WINDOW */}
       {open && (
         <ChatWindow
           onClose={() => setOpen(false)}
@@ -41,7 +37,6 @@ export default function AIBot({ onConsult }) {
         />
       )}
 
-      {/* INTRO POPUP */}
       {showHint && !open && (
         <button
           type="button"
@@ -49,27 +44,33 @@ export default function AIBot({ onConsult }) {
           onClick={handleHintClick}
           aria-label="Open CoreAMP Virtual Assistant"
         >
-          <div className="ai-intro-icon">
-            <Bot size={21} strokeWidth={1.8} />
-          </div>
+          <span
+            className="ai-intro-icon"
+            aria-hidden="true"
+          >
+            <Bot size={20} strokeWidth={1.8} />
+          </span>
 
-          <div className="ai-intro-content">
+          <span className="ai-intro-content">
             <strong>
-              Hi! I'm CoreAMP Virtual Assistant
+              Hi! I&apos;m CoreAMP Assistant
               <span className="ai-wave">👋</span>
             </strong>
 
-            <span>
-              Confused about your project? Chat with us —
-              I'll help you find the right solution.
+            <span className="ai-intro-description">
+              Need help choosing the right engineering service?
             </span>
-          </div>
 
-          <span className="ai-popup-arrow" />
+            <small>Tap to start a quick chat</small>
+          </span>
+
+          <span
+            className="ai-popup-arrow"
+            aria-hidden="true"
+          />
         </button>
       )}
 
-      {/* AI BOT BUTTON */}
       <button
         type="button"
         className={`coreamp-ai-button ${
@@ -84,22 +85,22 @@ export default function AIBot({ onConsult }) {
         aria-expanded={open}
         title="Chat with CoreAMP Assistant"
       >
-        <span className="ai-button-ring" />
+        <span
+          className="ai-button-ring"
+          aria-hidden="true"
+        />
 
         {open ? (
-          <X
-            size={27}
-            strokeWidth={1.8}
-          />
+          <X size={27} strokeWidth={1.8} />
         ) : (
-          <Bot
-            size={29}
-            strokeWidth={1.8}
-          />
+          <Bot size={29} strokeWidth={1.8} />
         )}
 
         {!open && (
-          <span className="ai-online-indicator" />
+          <span
+            className="ai-online-indicator"
+            aria-hidden="true"
+          />
         )}
       </button>
     </>

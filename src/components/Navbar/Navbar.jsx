@@ -3,7 +3,6 @@ import {
   ChevronDown,
   Menu,
   X,
-  Zap,
 } from "lucide-react";
 
 import {
@@ -411,19 +410,13 @@ export default function Navbar({ onConsult }) {
           aria-label="CoreAMP home"
         >
 
-          <span
-            className="navbar-logo-box"
-            aria-hidden="true"
-          >
-
-            <Zap
-              size={20}
-              strokeWidth={1.7}
-            />
-
-            <i />
-
-          </span>
+          <span className="navbar-logo-box">
+  <img
+    src="/images/coreamp-logo.png"
+    alt="CoreAMP Engineering logo"
+    className="navbar-logo-image"
+  />
+</span>
 
 
           <span className="navbar-brand-text">

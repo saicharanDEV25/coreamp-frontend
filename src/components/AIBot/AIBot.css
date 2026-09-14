@@ -1,39 +1,29 @@
-﻿/* =========================================================
-   COREAMP AI BOT BUTTON
-========================================================= */
+﻿/* AI BUTTON */
 
 .coreamp-ai-button {
   position: fixed;
-
   right: 28px;
   bottom: 104px;
+  z-index: 9999;
 
+  display: grid;
   width: 64px;
   height: 64px;
-
   padding: 0;
+  place-items: center;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.18);
-
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 50%;
 
+  color: #111315;
   background:
     linear-gradient(
       145deg,
-      var(--gold-2),
-      var(--accent)
+      var(--gold-2, #e1bd75),
+      var(--accent, #14b8a6)
     );
 
-  color: #111315;
-
   cursor: pointer;
-
-  z-index: 9999;
 
   box-shadow:
     0 14px 34px rgba(0, 0, 0, 0.38),
@@ -44,116 +34,93 @@
     box-shadow 0.3s ease;
 }
 
-
 .coreamp-ai-button:hover {
-  transform:
-    translateY(-4px)
-    scale(1.05);
+  transform: translateY(-4px) scale(1.05);
 
   box-shadow:
     0 19px 42px rgba(0, 0, 0, 0.42),
     0 0 32px rgba(20, 184, 166, 0.25);
 }
 
+.coreamp-ai-button:focus-visible,
+.ai-intro-popup:focus-visible {
+  outline: 3px solid rgba(20, 184, 166, 0.65);
+  outline-offset: 4px;
+}
 
-/* =========================================================
-   BOT RING
-========================================================= */
+/* BUTTON RING */
 
 .ai-button-ring {
   position: absolute;
-
   inset: -2px;
 
+  border: 1px solid rgba(20, 184, 166, 0.65);
   border-radius: 50%;
-
-  border:
-    1px solid rgba(20, 184, 166, 0.65);
 
   pointer-events: none;
 
-  animation:
-    aiRing
-    3.8s
-    infinite;
+  animation: aiRing 3.8s infinite;
 }
-
 
 .ai-open .ai-button-ring {
   display: none;
 }
 
-
-/* =========================================================
-   ONLINE INDICATOR
-========================================================= */
+/* ONLINE INDICATOR */
 
 .ai-online-indicator {
   position: absolute;
-
   right: 1px;
   bottom: 5px;
 
+  display: block;
   width: 13px;
   height: 13px;
 
+  border: 2px solid #111317;
   border-radius: 50%;
 
   background: #25d366;
 
-  border:
-    2px solid #111317;
-
-  box-shadow:
-    0 0 9px rgba(37, 211, 102, 0.7);
+  box-shadow: 0 0 9px rgba(37, 211, 102, 0.7);
 }
 
-
-/* =========================================================
-   INTRO POPUP
-========================================================= */
+/* INTRO POPUP */
 
 .ai-intro-popup {
   position: fixed;
-
   right: 108px;
   bottom: 98px;
-
-  width: 375px;
-
-  min-height: 132px;
-
-  padding:
-    20px 22px;
+  z-index: 9998;
 
   display: grid;
+  grid-template-columns: 50px minmax(0, 1fr);
+  width: 375px;
+  min-height: 125px;
+  padding: 19px 21px;
+  align-items: center;
+  gap: 14px;
 
-  grid-template-columns:
-    50px 1fr;
+  overflow: visible;
 
-  align-items: start;
-
-  gap: 15px;
-
-  border:
-    1px solid rgba(20, 184, 166, 0.42);
-
+  border: 1px solid rgba(20, 184, 166, 0.42);
   border-radius: 18px;
 
+  color: #ffffff;
   background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(202, 174, 116, 0.12),
+      transparent 34%
+    ),
     linear-gradient(
       145deg,
       rgba(27, 30, 35, 0.98),
       rgba(15, 17, 20, 0.99)
     );
 
-  color: #ffffff;
-
   text-align: left;
-
   cursor: pointer;
-
-  z-index: 9998;
 
   box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.42),
@@ -163,9 +130,8 @@
   -webkit-backdrop-filter: blur(18px);
 
   animation:
-    aiPopupEnter
-    0.45s
-    cubic-bezier(.22, 1, .36, 1);
+    aiPopupEnter 0.45s
+    cubic-bezier(0.22, 1, 0.36, 1);
 
   transition:
     transform 0.25s ease,
@@ -173,288 +139,284 @@
     box-shadow 0.25s ease;
 }
 
-
 .ai-intro-popup:hover {
-  border-color:
-    rgba(20, 184, 166, 0.72);
-
-  transform:
-    translateY(-2px);
+  border-color: rgba(20, 184, 166, 0.72);
+  transform: translateY(-2px);
 
   box-shadow:
     0 28px 65px rgba(0, 0, 0, 0.48),
     0 0 35px rgba(20, 184, 166, 0.12);
 }
 
-
-/* =========================================================
-   POPUP BOT ICON
-========================================================= */
+/* POPUP ICON */
 
 .ai-intro-icon {
+  display: grid;
   width: 50px;
   height: 50px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 0 0 auto;
+  place-items: center;
 
   border-radius: 50%;
 
+  color: #111315;
   background:
     linear-gradient(
       145deg,
-      var(--gold-2),
-      var(--accent)
+      var(--gold-2, #e1bd75),
+      var(--accent, #14b8a6)
     );
 
-  color: #111315;
-
   box-shadow:
-    0 8px 22px rgba(202, 174, 116, 0.20);
+    0 8px 22px rgba(202, 174, 116, 0.2);
 }
 
-
-/* =========================================================
-   POPUP CONTENT
-========================================================= */
+/* POPUP CONTENT */
 
 .ai-intro-content {
-  min-width: 0;
-
   display: flex;
+  min-width: 0;
   flex-direction: column;
-
-  gap: 8px;
+  gap: 6px;
 }
-
 
 .ai-intro-content strong {
   color: #f7f7f7;
-
-  font-size: 15px;
-
+  font-size: 14px;
   font-weight: 700;
-
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
+.ai-intro-description {
+  color: #aeb2b9;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.ai-intro-content small {
+  color: #d2b16e;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
 
 .ai-wave {
   display: inline-block;
+  margin-left: 5px;
 
-  margin-left: 6px;
-
-  animation:
-    aiWave
-    1.3s ease
-    2;
+  animation: aiWave 1.3s ease 2;
 }
 
-
-.ai-intro-content > span {
-  color: #aeb2b9;
-
-  font-size: 13px;
-
-  font-weight: 400;
-
-  line-height: 1.6;
-}
-
-
-/* =========================================================
-   ARROW CONNECTING POPUP TO BOT
-========================================================= */
+/* POPUP ARROW */
 
 .ai-popup-arrow {
   position: absolute;
-
   right: -9px;
   bottom: 31px;
 
   width: 18px;
   height: 18px;
 
+  border-top: 1px solid rgba(20, 184, 166, 0.42);
+  border-right: 1px solid rgba(20, 184, 166, 0.42);
+
   background: #111317;
 
-  border-top:
-    1px solid rgba(20, 184, 166, 0.42);
-
-  border-right:
-    1px solid rgba(20, 184, 166, 0.42);
-
-  transform:
-    rotate(45deg);
+  transform: rotate(45deg);
 }
 
-
-/* =========================================================
-   ANIMATIONS
-========================================================= */
+/* ANIMATIONS */
 
 @keyframes aiPopupEnter {
   from {
     opacity: 0;
-
-    transform:
-      translateX(26px)
-      scale(0.96);
+    transform: translateX(26px) scale(0.96);
   }
 
   to {
     opacity: 1;
-
-    transform:
-      translateX(0)
-      scale(1);
+    transform: translateX(0) scale(1);
   }
 }
-
 
 @keyframes aiRing {
   0% {
-    transform:
-      scale(0.95);
-
     opacity: 0.75;
+    transform: scale(0.95);
   }
 
-  75% {
-    transform:
-      scale(1.32);
-
-    opacity: 0;
-  }
-
+  75%,
   100% {
-    transform:
-      scale(1.32);
-
     opacity: 0;
+    transform: scale(1.32);
   }
 }
-
 
 @keyframes aiWave {
   0%,
   100% {
-    transform:
-      rotate(0deg);
+    transform: rotate(0deg);
   }
 
   25% {
-    transform:
-      rotate(18deg);
+    transform: rotate(18deg);
   }
 
   50% {
-    transform:
-      rotate(-8deg);
+    transform: rotate(-8deg);
   }
 
   75% {
-    transform:
-      rotate(15deg);
+    transform: rotate(15deg);
   }
 }
 
-
-/* =========================================================
-   TABLET
-========================================================= */
+/* TABLET */
 
 @media (max-width: 900px) {
-
   .ai-intro-popup {
-    width: 340px;
-
     right: 100px;
-
-    padding:
-      18px 20px;
+    width: 330px;
+    padding: 17px 19px;
   }
-
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
+/* MOBILE */
 
 @media (max-width: 600px) {
-
   .coreamp-ai-button {
     right: 18px;
-    bottom: 78px;
+    bottom: 82px;
 
     width: 54px;
     height: 54px;
   }
 
-
   .coreamp-ai-button > svg {
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
   }
-
 
   .ai-online-indicator {
-    width: 11px;
-    height: 11px;
-
     right: 0;
     bottom: 3px;
+
+    width: 11px;
+    height: 11px;
   }
 
+  /*
+   * Mobile popup full width కాదు.
+   * Bot button పక్కన compact messageగా ఉంటుంది.
+   */
 
   .ai-intro-popup {
-    right: 16px;
-    bottom: 148px;
-    left: 16px;
+    right: 80px;
+    bottom: 87px;
+    left: auto;
 
-    width: auto;
+    grid-template-columns: 34px minmax(0, 1fr);
 
-    min-height: auto;
+    width: min(245px, calc(100vw - 102px));
+    min-height: 70px;
+    padding: 11px 12px;
+    gap: 9px;
 
-    padding:
-      17px 18px;
+    border-radius: 13px;
 
-    grid-template-columns:
-      43px 1fr;
-
-    gap: 12px;
-
-    border-radius: 15px;
+    box-shadow:
+      0 16px 38px rgba(0, 0, 0, 0.4),
+      0 0 20px rgba(20, 184, 166, 0.07);
   }
-
 
   .ai-intro-icon {
-    width: 43px;
-    height: 43px;
+    width: 34px;
+    height: 34px;
   }
 
+  .ai-intro-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .ai-intro-content {
+    gap: 3px;
+  }
 
   .ai-intro-content strong {
-    font-size: 13px;
+    font-size: 10px;
+    line-height: 1.25;
   }
 
-
-  .ai-intro-content > span {
-    font-size: 11px;
-
-    line-height: 1.55;
+  .ai-intro-description {
+    display: none;
   }
 
+  .ai-intro-content small {
+    font-size: 7px;
+    line-height: 1.3;
+  }
+
+  .ai-wave {
+    margin-left: 3px;
+  }
 
   .ai-popup-arrow {
-    right: 26px;
-    bottom: -9px;
+    right: -7px;
+    bottom: 18px;
 
-    transform:
-      rotate(135deg);
+    width: 13px;
+    height: 13px;
+
+    transform: rotate(45deg);
+  }
+}
+
+/* VERY SMALL MOBILE */
+
+@media (max-width: 380px) {
+  .coreamp-ai-button {
+    right: 14px;
+    bottom: 78px;
+
+    width: 50px;
+    height: 50px;
   }
 
+  .ai-intro-popup {
+    right: 72px;
+    bottom: 80px;
+
+    width: min(220px, calc(100vw - 88px));
+    min-height: 62px;
+    padding: 9px 10px;
+
+    grid-template-columns: 30px minmax(0, 1fr);
+  }
+
+  .ai-intro-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ai-intro-content strong {
+    font-size: 9px;
+  }
+
+  .ai-intro-content small {
+    font-size: 6.5px;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .coreamp-ai-button,
+  .ai-intro-popup,
+  .ai-button-ring,
+  .ai-wave {
+    animation: none;
+    transition: none;
+  }
 }
