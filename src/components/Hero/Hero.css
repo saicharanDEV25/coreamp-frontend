@@ -1,197 +1,471 @@
-﻿.hero {
+﻿@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap');
+
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
   position: relative;
   min-height: max(650px, 96svh);
-  padding: calc(var(--nav-height) + 82px) 0 78px;
+
+  padding:
+    calc(var(--nav-height) + 82px)
+    0
+    78px;
+
   display: flex;
   align-items: center;
+
   overflow: hidden;
+
   background: #0b0d10;
   color: #ffffff;
+
   scroll-margin-top: var(--nav-height);
 }
+
+
+/* =========================
+   HERO BACKGROUND
+========================= */
 
 .hero-backdrop {
   position: absolute;
   inset: 0;
+
   background-image:
-    linear-gradient(90deg, rgba(17, 15, 13, .96) 0%, rgba(17, 15, 13, .82) 38%, rgba(17, 15, 13, .16) 72%, rgba(17, 15, 13, .04) 100%),
-    linear-gradient(180deg, rgba(17, 15, 13, .02) 52%, rgba(17, 15, 13, .7) 100%),
-    url('/images/coreamp-hero-v3.png');
+    linear-gradient(
+      90deg,
+      rgba(10, 10, 10, 0.94) 0%,
+      rgba(10, 10, 10, 0.80) 34%,
+      rgba(10, 10, 10, 0.42) 53%,
+      rgba(10, 10, 10, 0.08) 78%,
+      rgba(10, 10, 10, 0.02) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 5, 0.08) 45%,
+      rgba(5, 5, 5, 0.66) 100%
+    ),
+    url('/images/Hero_image.png');
+
   background-size: cover;
-  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  transform: scale(1.015);
+
   pointer-events: none;
 }
 
-.hero-backdrop::before { display: none; }
+
+/* subtle premium warm glow */
+
+.hero-backdrop::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 48% 55%,
+      rgba(203, 165, 94, 0.10),
+      transparent 33%
+    );
+
+  pointer-events: none;
+}
+
+
+.hero-backdrop::before {
+  display: none;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
 
 .hero-content {
   position: relative;
   z-index: 2;
 }
 
+
 .hero-copy {
-  max-width: 900px;
+  max-width: 940px;
 }
 
+
+/* =========================
+   PREMIUM HERO TITLE
+========================= */
+
 .hero h1 {
-  max-width: 900px;
-  margin: 22px 0 28px;
-  color: #ffffff;
-  font-size: clamp(72px, 7vw, 98px);
-  font-weight: 800;
-  letter-spacing: 0;
+  max-width: 960px;
+
+  margin: 18px 0 28px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: clamp(66px, 6.7vw, 104px);
+
+  font-weight: 500;
+
   line-height: 0.92;
+
+  letter-spacing: -0.065em;
+
+  color: #f8f6f1;
+
+  text-wrap: balance;
 }
+
+
+/* Premium second line */
 
 .hero h1 em {
   display: inline-block;
-  color: #d8bd84;
-  font-family: inherit;
-  font-style: normal;
-  font-weight: 800;
-  letter-spacing: 0;
+
+  margin-top: 5px;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 1.13em;
+
+  font-style: italic;
+
+  font-weight: 500;
+
+  line-height: 0.86;
+
+  letter-spacing: -0.045em;
+
+  background: linear-gradient(
+    110deg,
+    #f4e5bd 0%,
+    #c9a45d 42%,
+    #ead399 72%,
+    #c5a05a 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+
+  padding-right: 0.08em;
 }
 
+
+/* =========================
+   HERO DESCRIPTION
+========================= */
+
 .hero-copy > p {
-  max-width: 690px;
+  max-width: 650px;
+
   margin: 0;
-  color: #d4dfed;
-  font-size: 19px;
+
+  font-family: "Manrope", sans-serif;
+
+  color: rgba(238, 241, 245, 0.78);
+
+  font-size: 18px;
+
+  font-weight: 400;
+
   line-height: 1.75;
+
+  letter-spacing: -0.01em;
 }
+
+
+/* =========================
+   BUTTONS
+========================= */
 
 .hero-actions {
   margin-top: 34px;
+
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+
+  gap: 14px;
 }
+
 
 .hero-actions .btn {
-  min-width: 178px;
+  min-width: 185px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-weight: 600;
+
+  border-radius: 8px;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
 }
+
+
+.hero-actions .btn:hover {
+  transform: translateY(-2px);
+}
+
+
+/* Outline button */
 
 .hero .btn-outline {
-  border-color: rgba(255, 255, 255, 0.4);
-  color: #ffffff;
-  background: rgba(5, 18, 37, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  color: rgba(255, 255, 255, 0.92);
+
+  background: rgba(15, 15, 15, 0.26);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
+
 
 .hero .btn-outline:hover {
-  border-color: #ffffff;
-  background: rgba(255, 255, 255, .12);
+  border-color: rgba(216, 189, 132, 0.85);
+
+  color: #ffffff;
+
+  background: rgba(216, 189, 132, 0.10);
 }
 
+
+/* =========================
+   PROOF / FEATURES
+========================= */
+
 .hero-proof {
-  max-width: 690px;
-  margin-top: 36px;
+  max-width: 700px;
+
+  margin-top: 38px;
+
   padding-top: 20px;
+
   display: flex;
+
   flex-wrap: wrap;
-  gap: 12px 22px;
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+
+  gap: 14px 28px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.13);
 }
+
 
 .hero-proof-item {
   display: inline-flex;
+
   align-items: center;
-  gap: 9px;
-  color: #d4dfed;
+
+  gap: 10px;
+
+  font-family: "Manrope", sans-serif;
+
+  color: rgba(235, 240, 246, 0.78);
+
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0;
+
+  font-weight: 500;
+
+  letter-spacing: -0.01em;
 }
+
 
 .hero-proof-item svg {
   flex: 0 0 auto;
-  color: var(--accent);
+
+  color: #c9a45d;
 }
+
+
+/* =========================
+   SCROLL LABEL
+========================= */
 
 .scroll-label {
   position: absolute;
+
   right: 24px;
   bottom: 42px;
+
   z-index: 3;
+
   display: flex;
+
   align-items: center;
-  gap: 10px;
-  color: #cbd5e1;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0;
+
+  gap: 12px;
+
+  font-family: "Manrope", sans-serif;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
   transform: rotate(90deg);
+
   transform-origin: right bottom;
 }
 
+
 .scroll-label span {
   width: 48px;
+
   height: 1px;
-  background: currentColor;
+
+  background: rgba(201, 164, 93, 0.8);
 }
 
+
+/* =========================
+   TABLET / MOBILE
+========================= */
+
 @media (max-width: 760px) {
+
   .hero {
-    min-height: 690px;
-    padding: calc(var(--nav-height) + 48px) 0 46px;
+    min-height: 700px;
+
+    padding:
+      calc(var(--nav-height) + 48px)
+      0
+      48px;
   }
+
 
   .hero-backdrop {
     background-image:
-      linear-gradient(180deg, rgba(17, 15, 13, .4), rgba(17, 15, 13, .94) 66%),
-      url('/images/coreamp-hero-v3.png');
-    background-position: 64% center;
+
+      linear-gradient(
+        180deg,
+        rgba(10, 10, 10, 0.26) 0%,
+        rgba(10, 10, 10, 0.56) 42%,
+        rgba(10, 10, 10, 0.94) 83%
+      ),
+
+      url('/images/Hero_image.png');
+
+    background-position: 63% center;
+
+    transform: none;
   }
+
 
   .hero h1 {
-    margin: 18px 0 24px;
-    font-size: 56px;
-    line-height: 1.02;
+    max-width: 520px;
+
+    margin: 16px 0 23px;
+
+    font-size: clamp(52px, 14vw, 66px);
+
+    line-height: 0.94;
+
+    letter-spacing: -0.055em;
   }
 
-  .hero-copy > p {
-    max-width: 330px;
-    color: #d4dfed;
-    font-size: 16px;
-    line-height: 1.7;
+
+  .hero h1 em {
+    font-size: 1.1em;
+
+    line-height: 0.9;
   }
+
+
+  .hero-copy > p {
+    max-width: 360px;
+
+    color: rgba(237, 241, 246, 0.78);
+
+    font-size: 16px;
+
+    line-height: 1.65;
+  }
+
 
   .hero-actions {
     margin-top: 29px;
   }
 
+
   .hero-actions .btn {
     min-width: 0;
   }
 
+
   .hero-proof {
     margin-top: 28px;
+
+    gap: 14px;
   }
+
 
   .scroll-label {
     display: none;
   }
+
 }
 
-@media (max-width: 420px) {
-  .hero h1 {
-    font-size: 45px;
-  }
 
-  .hero-copy > p {
-    max-width: 310px;
-  }
-}
+/* =========================
+   SMALL MOBILE
+========================= */
 
 @media (max-width: 520px) {
+
   .hero-actions {
     flex-direction: column;
+
+    width: 100%;
   }
+
 
   .hero-actions .btn {
     width: 100%;
   }
 
+
   .hero-proof-item {
     width: 100%;
   }
+
+}
+
+
+@media (max-width: 420px) {
+
+  .hero h1 {
+    font-size: 46px;
+
+    letter-spacing: -0.045em;
+  }
+
+
+  .hero h1 em {
+    font-size: 1.08em;
+  }
+
+
+  .hero-copy > p {
+    max-width: 310px;
+
+    font-size: 15px;
+  }
+
 }

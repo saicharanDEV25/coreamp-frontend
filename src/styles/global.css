@@ -393,3 +393,21 @@ main {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Remove all background grid lines */
+
+.services-background-grid,
+.projects-page-grid,
+.how-we-work-grid,
+.let-us-know-grid,
+.footer-grid-pattern {
+  display: none !important;
+}
+
+.contact-page::before,
+.about-principles::before,
+.cta-section::before {
+  display: none !important;
+  content: none !important;
+  background-image: none !important;
+}

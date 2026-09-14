@@ -1,79 +1,42 @@
 import { Bot, X } from "lucide-react";
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 
 import ChatWindow from "./ChatWindow";
 import "./AIBot.css";
 
-export default function AIBot({
-  onConsult,
-}) {
+export default function AIBot({ onConsult }) {
   const [open, setOpen] = useState(false);
 
-  const [showHint, setShowHint] =
-    useState(false);
+  // Every refresh lo popup visible ga start avutundi
+  const [showHint, setShowHint] = useState(true);
 
   useEffect(() => {
-    const isSmallScreen = window.matchMedia(
-      "(max-width: 760px)"
-    ).matches;
-
-    let hintSeen = false;
-
-    try {
-      hintSeen = window.sessionStorage.getItem(
-        "coreamp-assistant-hint"
-      ) === "seen";
-    } catch {
-      hintSeen = false;
-    }
-
-    if (isSmallScreen || hintSeen) return undefined;
-
-    const showTimer = window.setTimeout(() => {
-      setShowHint(true);
-
-      try {
-        window.sessionStorage.setItem(
-          "coreamp-assistant-hint",
-          "seen"
-        );
-      } catch {
-        // The hint still works when storage is unavailable.
-      }
-    }, 6500);
-
+    // 10 seconds visible
     const hideTimer = window.setTimeout(() => {
       setShowHint(false);
-    }, 13500);
+    }, 10000);
 
     return () => {
-      window.clearTimeout(showTimer);
       window.clearTimeout(hideTimer);
     };
   }, []);
 
   const handleBotClick = () => {
     setOpen((previous) => !previous);
-
     setShowHint(false);
   };
 
   const handleHintClick = () => {
     setOpen(true);
-
     setShowHint(false);
   };
 
   return (
     <>
+      {/* CHAT WINDOW */}
       {open && (
         <ChatWindow
-          onClose={() =>
-            setOpen(false)
-          }
+          onClose={() => setOpen(false)}
           onConsult={onConsult}
         />
       )}
@@ -84,22 +47,21 @@ export default function AIBot({
           type="button"
           className="ai-intro-popup"
           onClick={handleHintClick}
+          aria-label="Open CoreAMP Virtual Assistant"
         >
           <div className="ai-intro-icon">
-            <Bot size={19} />
+            <Bot size={21} strokeWidth={1.8} />
           </div>
 
           <div className="ai-intro-content">
             <strong>
-              Hi! I'm CoreAMP Virtual
-              Assistant {"\u{1F44B}"}
+              Hi! I'm CoreAMP Virtual Assistant
+              <span className="ai-wave">👋</span>
             </strong>
 
             <span>
-              Confused about your
-              project? Chat with us -
-              I'll help you find the
-              right solution.
+              Confused about your project? Chat with us —
+              I'll help you find the right solution.
             </span>
           </div>
 
@@ -114,7 +76,11 @@ export default function AIBot({
           open ? "ai-open" : ""
         }`}
         onClick={handleBotClick}
-        aria-label={open ? "Close CoreAMP Assistant" : "Open CoreAMP Assistant"}
+        aria-label={
+          open
+            ? "Close CoreAMP Assistant"
+            : "Open CoreAMP Assistant"
+        }
         aria-expanded={open}
         title="Chat with CoreAMP Assistant"
       >

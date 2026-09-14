@@ -46,15 +46,12 @@ export default function Hero({ onConsult }) {
           initial="hidden"
           animate="visible"
         >
-          <motion.span className="eyebrow" variants={itemVariants}>
-            Electrical Design / Power System Studies
-          </motion.span>
 
-          <motion.h1 variants={itemVariants}>
-            Design. Engineer.
-            <br />
-            <em>Build.</em>
-          </motion.h1>
+          <motion.h1 variants={itemVariants} className="hero-title">
+              Built Beyond
+          <br />
+          <em>Expectations.</em>
+         </motion.h1>
 
           <motion.p variants={itemVariants}>
             Reliable electrical design, power-system analysis and coordinated
@@ -68,17 +65,6 @@ export default function Hero({ onConsult }) {
             <button type="button" className="btn btn-outline" onClick={onConsult}>
               Book consultation
             </button>
-          </motion.div>
-
-          <motion.div className="hero-proof" variants={itemVariants}>
-            <div className="hero-proof-item">
-              <ShieldCheck size={17} />
-              <span>Standards-led thinking</span>
-            </div>
-            <div className="hero-proof-item">
-              <CheckCircle2 size={17} />
-              <span>Coordinated technical delivery</span>
-            </div>
           </motion.div>
         </motion.div>
       </div>

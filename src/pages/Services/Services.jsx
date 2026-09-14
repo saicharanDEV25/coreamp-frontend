@@ -1,21 +1,71 @@
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import {
+  motion,
+  useReducedMotion,
+} from "framer-motion";
 
-import SectionHeader from "../../components/SectionHeader/SectionHeader";
-import ServiceCard from "../../components/ServiceCard/ServiceCard";
-
-import { services } from "../../data/siteData";
+import {
+  ArrowUpRight,
+  Cable,
+  Layers3,
+  Lightbulb,
+  Network,
+  Zap,
+} from "lucide-react";
 
 import "./Services.css";
+
+const WHATSAPP_NUMBER = "918951262696";
+
+const services = [
+  {
+    icon: Zap,
+    title: "Electrical Design",
+    text:
+      "Power Distribution, SLDs, Load Calculations, Equipment Sizing, Cable Routing, Grounding and Lighting.",
+    image:
+      "/images/services/electrical-design.png",
+  },
+  {
+    icon: Network,
+    title: "Power System Studies",
+    text:
+      "SKM Modeling, Load Flow, Short Circuit, Protection Coordination and Arc-Flash Studies.",
+    image:
+      "/images/services/power-system-studies.png",
+  },
+  {
+    icon: Layers3,
+    title: "BIM & Coordination",
+    text:
+      "Integrated Mechanical, Electrical, Plumbing, Fire and Low-Current Engineering with coordinated BIM models, clash detection and construction-ready documentation.",
+    image:
+      "/images/services/mep-coordination.png",
+  },
+  {
+    icon: Lightbulb,
+    title: "Lighting Engineering",
+    text:
+      "Indoor Lighting, Outdoor Lighting, Lighting Calculations and Multidisciplinary Coordination.",
+    image:
+      "/images/services/lighting-engineering.png",
+  },
+  {
+    icon: Cable,
+    title: "Critical Power & Distribution",
+    text:
+      "Transformers, UPS, Generators, Switchgear and Distribution Strategy for Reliable Critical Systems.",
+    image:
+      "/images/services/critical-power.png",
+  },
+];
 
 const containerVariants = {
   hidden: {},
 
   visible: {
     transition: {
-      staggerChildren: 0.16,
-      delayChildren: 0.15,
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
     },
   },
 };
@@ -23,292 +73,165 @@ const containerVariants = {
 const cardVariants = {
   hidden: {
     opacity: 0,
-    y: 55,
-    scale: 0.97,
-    filter: "blur(5px)",
+    y: 35,
   },
 
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    filter: "blur(0px)",
 
     transition: {
-      duration: 0.9,
+      duration: 0.65,
       ease: [0.22, 1, 0.36, 1],
     },
   },
 };
 
-export default function Services({
-  onConsult,
-}) {
+function createWhatsAppLink(service) {
+  const message = [
+    "Hello CoreAMP Engineering,",
+    "",
+    `I would like to enquire about ${service.title}.`,
+    "",
+    `Service: ${service.title}`,
+    `Scope: ${service.text}`,
+    "",
+    "Please share more information about this service.",
+  ].join("\n");
+
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    message
+  )}`;
+}
+
+export default function Services() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="services-page">
-      {/* HERO */}
-      <section className="services-page-hero">
-        <div
-          className="services-page-grid"
-          aria-hidden="true"
-        />
-        <div
-          className="services-page-glow"
-          aria-hidden="true"
-        />
-
-        <div className="container services-page-hero-inner">
-          <motion.div
-            className="services-page-hero-copy"
-            initial={reduceMotion ? false : {
-              opacity: 0,
-              y: 45,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 1,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <span className="services-page-eyebrow">
-              COREAMP SERVICES
+    <section
+      id="services"
+      className="services-section"
+      aria-labelledby="services-heading"
+    >
+      <div className="container services-inner">
+        <motion.div
+          className="services-section-heading"
+          initial={
+            reduceMotion
+              ? false
+              : {
+                  opacity: 0,
+                  y: 28,
+                }
+          }
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: 0.7,
+          }}
+        >
+          <div>
+            <span className="services-kicker">
+              Our capabilities
             </span>
 
-            <h1>
-              Engineering services
+            <h2 id="services-heading">
+              Integrated engineering.
               <br />
 
               <em>
-                built around performance.
+                Clear technical direction.
               </em>
-            </h1>
-
-            <p>
-              Electrical engineering,
-              power-system studies and
-              coordinated MEP design for
-              commercial, residential,
-              healthcare, industrial and
-              mission-critical projects.
-            </p>
-
-            <button
-              type="button"
-              className="services-page-consult"
-              onClick={onConsult}
-            >
-              Discuss Your Project
-              <ArrowRight size={18} />
-            </button>
-          </motion.div>
-
-          <motion.ol
-            className="services-page-process"
-            aria-label="Core engineering workflow"
-            initial={reduceMotion ? false : { opacity: 0, x: 28 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              duration: 0.9,
-              delay: 0.35,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <li>
-              <span>01</span>
-              <div>
-                <strong>Design</strong>
-                <small>Electrical systems</small>
-              </div>
-            </li>
-            <li>
-              <span>02</span>
-              <div>
-                <strong>Study</strong>
-                <small>Network performance</small>
-              </div>
-            </li>
-            <li>
-              <span>03</span>
-              <div>
-                <strong>Coordinate</strong>
-                <small>Integrated MEP</small>
-              </div>
-            </li>
-          </motion.ol>
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section className="services-page-content">
-        <div className="container">
-          <motion.div
-            className="services-page-heading"
-            initial={reduceMotion ? false : {
-              opacity: 0,
-              y: 35,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-              amount: 0.25,
-            }}
-            transition={{
-              duration: 0.8,
-            }}
-          >
-            <SectionHeader
-              eyebrow="Our Capabilities"
-              title="Integrated engineering. Clear technical direction."
-              text="Explore CoreAMP's core electrical, power-system and coordinated MEP engineering capabilities."
-            />
-          </motion.div>
-
-          <motion.div
-            className="services-page-grid-cards"
-            variants={containerVariants}
-            initial={reduceMotion ? false : "hidden"}
-            whileInView="visible"
-            viewport={{
-              once: true,
-              amount: 0.1,
-            }}
-          >
-            {services.map(
-              (service, index) => (
-                <motion.div
-                  key={service.title}
-                  variants={cardVariants}
-                  className="services-page-card-wrap"
-                >
-                  <ServiceCard
-                    service={service}
-                    index={index}
-                  />
-                </motion.div>
-              )
-            )}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ELECTRICAL FOCUS */}
-      <section className="services-focus-section">
-        <div className="container services-focus-grid">
-          <motion.div
-            initial={reduceMotion ? false : {
-              opacity: 0,
-              x: -40,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.85,
-            }}
-          >
-            <span className="services-page-eyebrow">
-              PRIMARY FOCUS
-            </span>
-
-            <h2>
-              Electrical engineering
-              with technical depth.
-            </h2>
-
-            <p>
-              From power distribution and
-              single-line diagrams to load
-              calculations, equipment sizing,
-              cable engineering, grounding
-              and lighting design.
-            </p>
-
-            <Link
-              to="/#services"
-              className="services-focus-link"
-            >
-              View Services
-              <ArrowRight size={17} />
-            </Link>
-          </motion.div>
-
-          <motion.ol
-            className="services-focus-list"
-            aria-label="Electrical design scope"
-            initial={reduceMotion ? false : {
-              opacity: 0,
-              x: 40,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.85,
-            }}
-          >
-            {[
-              "Power Distribution Design",
-              "Single Line Diagrams",
-              "Load Calculations",
-              "Equipment Sizing",
-              "Cable Sizing & Routing",
-              "Grounding & Bonding",
-              "Lighting Design",
-            ].map((item, index) => (
-              <li key={item}>
-                <span>
-                  {String(index + 1).padStart(
-                    2,
-                    "0"
-                  )}
-                </span>
-
-                <p>{item}</p>
-              </li>
-            ))}
-          </motion.ol>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="services-bottom-cta">
-        <div className="container services-bottom-inner">
-          <div>
-            <span className="services-page-eyebrow">
-              START A PROJECT
-            </span>
-
-            <h2>
-              Need engineering support
-              for your next project?
             </h2>
           </div>
 
-          <button
-            type="button"
-            onClick={onConsult}
-          >
-            Book Consultation
-            <ArrowRight size={18} />
-          </button>
-        </div>
-      </section>
-    </div>
+          <p>
+            Explore CoreAMP&apos;s Electrical,
+            Power-System, MEP, BIM, Lighting and
+            Critical-Power engineering capabilities.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="services-card-grid"
+          variants={containerVariants}
+          initial={
+            reduceMotion
+              ? false
+              : "hidden"
+          }
+          whileInView="visible"
+          viewport={{
+            once: true,
+            amount: 0.08,
+          }}
+        >
+          {services.map((service, index) => {
+            const Icon = service.icon;
+
+            return (
+              <motion.article
+                key={service.title}
+                className="services-card"
+                variants={cardVariants}
+              >
+                <div className="services-card-image">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    loading="lazy"
+                  />
+
+                  <span className="services-card-index">
+                    {String(index + 1).padStart(
+                      2,
+                      "0"
+                    )}
+                  </span>
+                </div>
+
+                <div className="services-card-body">
+                  <div className="services-card-icon-row">
+                    <span
+                      className="services-card-icon"
+                      aria-hidden="true"
+                    >
+                      <Icon
+                        size={22}
+                        strokeWidth={1.5}
+                      />
+                    </span>
+
+                    <span className="services-card-line" />
+                  </div>
+
+                  <h3>{service.title}</h3>
+
+                  <p>{service.text}</p>
+
+                  <a
+                    href={createWhatsAppLink(service)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="services-card-action"
+                    aria-label={`Enquire about ${service.title} on WhatsApp`}
+                  >
+                    Start enquiry
+
+                    <ArrowUpRight size={15} />
+                  </a>
+                </div>
+              </motion.article>
+            );
+          })}
+        </motion.div>
+      </div>
+    </section>
   );
 }

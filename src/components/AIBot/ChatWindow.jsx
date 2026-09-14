@@ -1,6 +1,5 @@
 import {
   ChevronLeft,
-  Mail,
   MessageCircle,
   Phone,
   Send,
@@ -9,11 +8,16 @@ import {
   Zap,
 } from "lucide-react";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import ChatMessage from "./ChatMessage";
-import { createWhatsAppLeadLink } from "../../data/contact";
 import "./ChatWindow.css";
+
+const WHATSAPP_NUMBER = "918951262696";
 
 const services = {
   "Electrical Design": [
@@ -44,20 +48,62 @@ const services = {
   ],
 };
 
+function createWhatsAppLeadLink({
+  source = "CoreAMP AI Assistant",
+  name,
+  phone,
+  service,
+  requirement,
+} = {}) {
+  const fields = [
+    ["Source", source],
+    ["Name", name],
+    ["Phone", phone],
+    ["Service", service],
+    ["Requirement", requirement],
+  ]
+    .map(([label, value]) => [
+      label,
+      String(value ?? "").trim(),
+    ])
+    .filter(([, value]) => value);
+
+  const message = [
+    "Hello CoreAMP Engineering,",
+    "",
+    "I would like to discuss an engineering project.",
+    "",
+    ...fields.map(
+      ([label, value]) => `${label}: ${value}`
+    ),
+  ].join("\n");
+
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    message
+  )}`;
+}
+
 export default function ChatWindow({ onClose }) {
   const [step, setStep] = useState("name");
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
 
-  const [selectedService, setSelectedService] = useState("");
-  const [selectedRequirement, setSelectedRequirement] = useState("");
+  const [
+    selectedService,
+    setSelectedService,
+  ] = useState("");
+
+  const [
+    selectedRequirement,
+    setSelectedRequirement,
+  ] = useState("");
 
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "Hi \u{1F44B} Welcome to CoreAMP Engineering. What's your name?",
+      text:
+        "Hi 👋 Welcome to CoreAMP Engineering. What's your name?",
     },
   ]);
 
@@ -70,8 +116,8 @@ export default function ChatWindow({ onClose }) {
   }, [messages, step]);
 
   const addMessage = (sender, text) => {
-    setMessages((previous) => [
-      ...previous,
+    setMessages((previousMessages) => [
+      ...previousMessages,
       {
         sender,
         text,
@@ -84,14 +130,17 @@ export default function ChatWindow({ onClose }) {
 
     const cleanName = name.trim();
 
-    if (!cleanName) return;
+    if (!cleanName) {
+      return;
+    }
 
+    setName(cleanName);
     addMessage("user", cleanName);
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       addMessage(
         "bot",
-        `Hi ${cleanName}! \u{1F44B} Nice to meet you. Please share your contact details.`
+        `Hi ${cleanName}! 👋 Nice to meet you. Please share your phone number.`
       );
 
       setStep("contact");
@@ -101,14 +150,16 @@ export default function ChatWindow({ onClose }) {
   const handleContactSubmit = (event) => {
     event.preventDefault();
 
-    const cleanPhone = phone.trim();
-    const cleanEmail = email.trim();
+    const cleanPhone = phone.replace(/\D/g, "");
 
-    if (!cleanPhone || !cleanEmail) return;
+    if (cleanPhone.length !== 10) {
+      return;
+    }
 
-    addMessage("user", "Contact details submitted");
+    setPhone(cleanPhone);
+    addMessage("user", cleanPhone);
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       addMessage(
         "bot",
         `Thanks ${name}. What service are you looking for?`
@@ -123,7 +174,7 @@ export default function ChatWindow({ onClose }) {
 
     addMessage("user", service);
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       addMessage(
         "bot",
         `Great. Please select your requirement under ${service}.`
@@ -138,7 +189,7 @@ export default function ChatWindow({ onClose }) {
 
     addMessage("user", requirement);
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       addMessage(
         "bot",
         `Great, ${name}! We can help you with ${requirement}. Would you like to discuss your project with our team?`
@@ -150,10 +201,9 @@ export default function ChatWindow({ onClose }) {
 
   const getWhatsAppLink = () => {
     return createWhatsAppLeadLink({
-      source: "Virtual assistant",
+      source: "CoreAMP AI Assistant",
       name,
       phone,
-      email,
       service: selectedService,
       requirement: selectedRequirement,
     });
@@ -184,7 +234,6 @@ export default function ChatWindow({ onClose }) {
 
   return (
     <div className="coreamp-chat-window">
-      {/* HEADER */}
       <div className="chat-header">
         <div className="chat-header-left">
           <div className="chat-header-icon">
@@ -211,7 +260,6 @@ export default function ChatWindow({ onClose }) {
         </button>
       </div>
 
-      {/* CHAT BODY */}
       <div className="chat-body">
         {messages.map((message, index) => (
           <ChatMessage
@@ -220,7 +268,6 @@ export default function ChatWindow({ onClose }) {
           />
         ))}
 
-        {/* STEP 1 - NAME */}
         {step === "name" && (
           <form
             className="guided-form"
@@ -236,7 +283,9 @@ export default function ChatWindow({ onClose }) {
                 onChange={(event) =>
                   setName(event.target.value)
                 }
+                autoComplete="name"
                 autoFocus
+                required
               />
 
               <button
@@ -250,14 +299,13 @@ export default function ChatWindow({ onClose }) {
           </form>
         )}
 
-        {/* STEP 2 - PHONE + EMAIL */}
         {step === "contact" && (
           <form
             className="contact-details-form"
             onSubmit={handleContactSubmit}
           >
             <div className="contact-form-title">
-              Your Contact Details
+              Your Phone Number
             </div>
 
             <div className="contact-input-wrapper">
@@ -265,25 +313,21 @@ export default function ChatWindow({ onClose }) {
 
               <input
                 type="tel"
-                placeholder="Phone number"
+                inputMode="numeric"
+                autoComplete="tel"
+                placeholder="10 digit phone number"
                 value={phone}
-                onChange={(event) =>
-                  setPhone(event.target.value)
-                }
-                required
-              />
-            </div>
+                onChange={(event) => {
+                  const onlyNumbers =
+                    event.target.value
+                      .replace(/\D/g, "")
+                      .slice(0, 10);
 
-            <div className="contact-input-wrapper">
-              <Mail size={17} />
-
-              <input
-                type="email"
-                placeholder="Email address"
-                value={email}
-                onChange={(event) =>
-                  setEmail(event.target.value)
-                }
+                  setPhone(onlyNumbers);
+                }}
+                pattern="[0-9]{10}"
+                minLength={10}
+                maxLength={10}
                 required
               />
             </div>
@@ -298,7 +342,6 @@ export default function ChatWindow({ onClose }) {
           </form>
         )}
 
-        {/* STEP 3 - SERVICES */}
         {step === "service" && (
           <div className="guided-options">
             {Object.keys(services).map((service) => (
@@ -320,7 +363,6 @@ export default function ChatWindow({ onClose }) {
           </div>
         )}
 
-        {/* STEP 4 - REQUIREMENTS */}
         {step === "requirement" && (
           <div className="guided-options requirement-options">
             {services[selectedService]?.map(
@@ -336,7 +378,6 @@ export default function ChatWindow({ onClose }) {
                   }
                 >
                   <span className="requirement-dot" />
-
                   <span>{requirement}</span>
                 </button>
               )
@@ -344,19 +385,14 @@ export default function ChatWindow({ onClose }) {
           </div>
         )}
 
-        {/* STEP 5 - WHATSAPP */}
         {step === "complete" && (
           <div className="chat-contact-card">
             <div className="chat-contact-summary">
               <span>Selected Service</span>
-
               <strong>{selectedService}</strong>
 
               <span>Requirement</span>
-
-              <strong>
-                {selectedRequirement}
-              </strong>
+              <strong>{selectedRequirement}</strong>
             </div>
 
             <a
@@ -366,18 +402,16 @@ export default function ChatWindow({ onClose }) {
               className="chat-whatsapp-button"
             >
               <MessageCircle size={20} />
-
               Contact Our Team on WhatsApp
             </a>
 
             <p>
-              You'll be redirected to our CoreAMP
+              You&apos;ll be redirected to our CoreAMP
               Engineering team.
             </p>
           </div>
         )}
 
-        {/* BACK BUTTON */}
         {step !== "name" && (
           <button
             type="button"
