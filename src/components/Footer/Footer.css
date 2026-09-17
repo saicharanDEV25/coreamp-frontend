@@ -747,3 +747,54 @@
     transition: none;
   }
 }
+/* =========================
+   FOOTER SECTION BUTTONS
+========================= */
+
+.footer-section-link {
+  display: inline-flex;
+
+  min-width: 0;
+
+  padding: 0;
+  margin: 0;
+
+  align-items: center;
+
+  border: 0;
+
+  outline: none;
+
+  color: #929b9f;
+
+  background: transparent;
+
+  font-family: inherit;
+
+  font-size: inherit;
+
+  font-weight: inherit;
+
+  line-height: 1.6;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-section-link:hover {
+  color: var(--gold-2, #e1bd75);
+
+  transform: translateX(3px);
+}
+
+.footer-section-link:focus-visible {
+  outline:
+    2px solid var(--gold-2, #e1bd75);
+
+  outline-offset: 4px;
+}

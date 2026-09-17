@@ -57,7 +57,6 @@ const serviceMenu = [
       "Load Calculations",
       "Cable Sizing",
       "Grounding Design",
-      "Lighting Design",
     ],
   },
 
@@ -415,11 +414,11 @@ export default function Navbar({ onConsult }) {
           <span className="navbar-brand-text">
 
             <strong>
-              COREAMP
+              CoreAmp 
             </strong>
 
             <small>
-              ENGINEERING
+              Design Consultants
             </small>
 
           </span>

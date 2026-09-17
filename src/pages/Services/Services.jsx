@@ -21,7 +21,7 @@ const services = [
     icon: Zap,
     title: "Electrical Design",
     text:
-      "Power Distribution, SLDs, Load Calculations, Equipment Sizing, Cable Routing, Grounding and Lighting.",
+      "Power Distribution, SLDs, Load Calculations, Equipment Sizing, Cable Routing and Grounding .",
     image:
       "/images/services/electrical-design.png",
   },
