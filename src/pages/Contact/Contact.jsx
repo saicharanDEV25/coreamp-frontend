@@ -23,10 +23,9 @@ const CONTACT = {
 const SERVICES = [
   "Electrical Design",
   "Power System Studies",
-  "MEP Design & Coordination",
+  "MEP & Coordination",
   "Lighting Engineering",
   "Critical Power & Distribution",
-  "Engineering Review",
 ];
 
 const createWhatsAppLink = ({

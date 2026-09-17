@@ -20,11 +20,10 @@ const WHATSAPP_NUMBER = "918951262696";
 const CONTACT_SERVICES = [
   "Electrical Design",
   "Power System Studies",
-  "MEP Design & Coordination",
+  "MEP & Coordination",
   "BIM Services",
   "Lighting Engineering",
   "Critical Power & Distribution",
-  "Engineering Review",
 ];
 
 const FOCUSABLE_ELEMENTS = [
