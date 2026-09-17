@@ -1,12 +1,8 @@
 ﻿.footer {
   position: relative;
-
   width: 100%;
-
   padding: 0 0 25px;
-
   overflow: hidden;
-
   color: #aeb5b8;
 
   background:
@@ -27,6 +23,10 @@
       #0b1425
     );
 }
+
+/* =========================
+   TOP LINE
+========================= */
 
 .footer::before {
   position: absolute;
@@ -104,7 +104,8 @@
 
   overflow: hidden;
 
-  border: 1px solid rgba(202, 174, 116, 0.35);
+  border:
+    1px solid rgba(202, 174, 116, 0.35);
 
   border-radius: 12px;
 
@@ -293,6 +294,8 @@
 
 .footer-copyright {
   color: #687176;
+
+  line-height: 1.6;
 }
 
 /* =========================
@@ -302,18 +305,23 @@
 .footer-developer {
   display: inline-flex;
 
+  flex: 0 0 auto;
+
   align-items: center;
 
-  gap: 11px;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  white-space: nowrap;
 }
 
-/*
-  Website by Sai Charan
-  ONLY TEXT - NOT A BUTTON
-*/
+/* NORMAL TEXT */
 
 .footer-developer-text {
   display: inline-flex;
+
+  flex: 0 0 auto;
 
   align-items: center;
 
@@ -326,18 +334,24 @@
   font-weight: 600;
 
   line-height: 1.4;
+
+  white-space: nowrap;
 }
 
 .footer-developer-text strong {
+  display: inline-block;
+
   color: var(--gold-2, #e1bd75);
 
   font-weight: 800;
 
   letter-spacing: 0.01em;
+
+  white-space: nowrap;
 }
 
 /* =========================
-   WHATSAPP BUTTON ONLY
+   WHATSAPP BUTTON
 ========================= */
 
 .footer-whatsapp {
@@ -346,7 +360,7 @@
   width: 35px;
   height: 35px;
 
-  flex: 0 0 auto;
+  flex: 0 0 35px;
 
   place-items: center;
 
@@ -403,17 +417,11 @@
   transform: scale(0.96);
 }
 
-.footer-whatsapp:focus-visible {
-  outline:
-    2px solid var(--gold-2, #e1bd75);
-
-  outline-offset: 4px;
-}
-
 /* =========================
-   ACCESSIBILITY
+   FOCUS
 ========================= */
 
+.footer-whatsapp:focus-visible,
 .footer-brand:focus-visible,
 .footer-column a:focus-visible {
   outline:
@@ -427,6 +435,7 @@
 ========================= */
 
 @media (max-width: 900px) {
+
   .footer-grid {
     grid-template-columns:
       minmax(0, 1.2fr)
@@ -450,18 +459,24 @@
 ========================= */
 
 @media (max-width: 650px) {
+
   .footer {
-    padding-bottom: 22px;
+    padding-bottom: 20px;
   }
+
+  /* MAIN GRID */
 
   .footer-grid {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
 
-    gap: 39px 22px;
+    gap: 36px 20px;
 
-    padding: 52px 0 39px;
+    padding:
+      50px 0 38px;
   }
+
+  /* OVERVIEW */
 
   .footer-overview {
     grid-column: 1 / -1;
@@ -477,15 +492,33 @@
     line-height: 1.75;
   }
 
+  /* BRAND */
+
+  .footer-brand {
+    gap: 11px;
+  }
+
   .footer-brand-mark {
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
+
+    border-radius: 11px;
   }
 
   .footer-brand-logo {
-    width: 39px;
-    height: 39px;
+    width: 38px;
+    height: 38px;
   }
+
+  .footer-brand-copy strong {
+    font-size: 14px;
+  }
+
+  .footer-brand-copy small {
+    font-size: 8px;
+  }
+
+  /* COLUMNS */
 
   .footer-column {
     gap: 10px;
@@ -495,6 +528,8 @@
 
   .footer-column h3 {
     margin-bottom: 8px;
+
+    padding-bottom: 9px;
 
     font-size: 9px;
   }
@@ -508,35 +543,115 @@
     font-size: 10px;
   }
 
-  /* FOOTER BOTTOM MOBILE */
+  /* =========================
+     MOBILE FOOTER BOTTOM
+  ========================= */
 
   .footer-bottom {
+    width: 100%;
+
     min-height: 0;
 
-    padding-top: 20px;
-
-    align-items: flex-start;
+    padding-top: 18px;
 
     flex-direction: column;
 
-    gap: 17px;
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 13px;
+
+    text-align: center;
 
     font-size: 9px;
 
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
+  /* COPYRIGHT */
+
+  .footer-copyright {
+    display: block;
+
+    width: 100%;
+
+    margin: 0;
+
+    text-align: center;
+
+    color: #687176;
+
+    font-size: 8.5px;
+
+    line-height: 1.5;
+  }
+
+  /* WEBSITE BY SAI CHARAN */
+
   .footer-developer {
+    display: flex;
+
+    width: 100%;
+
+    align-items: center;
+
+    justify-content: center;
+
     gap: 9px;
+
+    margin: 0;
+
+    white-space: nowrap;
   }
 
   .footer-developer-text {
+    display: inline-flex;
+
+    flex: 0 0 auto;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    margin: 0;
+
+    color: #778187;
+
     font-size: 9.5px;
+
+    line-height: 1;
+
+    white-space: nowrap;
   }
 
+  .footer-developer-text strong {
+    display: inline-block;
+
+    margin: 0;
+
+    color: var(--gold-2, #e1bd75);
+
+    font-size: 9.5px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    white-space: nowrap;
+  }
+
+  /* WHATSAPP */
+
   .footer-whatsapp {
-    width: 33px;
-    height: 33px;
+    width: 32px;
+    height: 32px;
+
+    flex: 0 0 32px;
+
+    margin: 0;
   }
 
   .footer-whatsapp svg {
@@ -550,25 +665,74 @@
 ========================= */
 
 @media (max-width: 380px) {
+
   .footer-grid {
-    gap: 35px 16px;
+    gap: 32px 15px;
   }
 
   .footer-brand-copy strong {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .footer-column {
     font-size: 9px;
   }
 
-  .footer-developer-text {
+  .footer-bottom {
+    gap: 12px;
+  }
+
+  .footer-copyright {
+    font-size: 8px;
+  }
+
+  .footer-developer {
+    gap: 8px;
+  }
+
+  .footer-developer-text,
+  .footer-developer-text strong {
     font-size: 9px;
   }
 
   .footer-whatsapp {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
+
+    flex-basis: 30px;
+  }
+
+  .footer-whatsapp svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* =========================
+   EXTRA SMALL MOBILE
+========================= */
+
+@media (max-width: 330px) {
+
+  .footer-developer {
+    gap: 7px;
+  }
+
+  .footer-developer-text,
+  .footer-developer-text strong {
+    font-size: 8.5px;
+  }
+
+  .footer-whatsapp {
+    width: 29px;
+    height: 29px;
+
+    flex-basis: 29px;
+  }
+
+  .footer-whatsapp svg {
+    width: 14px;
+    height: 14px;
   }
 }
 
@@ -577,6 +741,7 @@
 ========================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   .footer-column a,
   .footer-whatsapp {
     transition: none;
