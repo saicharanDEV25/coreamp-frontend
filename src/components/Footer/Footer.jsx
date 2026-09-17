@@ -147,7 +147,7 @@ export default function Footer() {
             <span className="footer-brand-copy">
 
               <strong>
-                 CoreAmp Design Consultants
+                 CoreAmp 
               </strong>
 
               <small>
