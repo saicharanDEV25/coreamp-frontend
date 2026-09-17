@@ -1,9 +1,14 @@
 ﻿.footer {
   position: relative;
+
   width: 100%;
+
   padding: 0 0 25px;
+
   overflow: hidden;
+
   color: #aeb5b8;
+
   background:
     radial-gradient(
       circle at 8% 10%,
@@ -25,11 +30,15 @@
 
 .footer::before {
   position: absolute;
+
   top: 0;
   left: 8%;
+
   width: 84%;
   height: 1px;
+
   content: "";
+
   background:
     linear-gradient(
       90deg,
@@ -49,38 +58,54 @@
   z-index: 1;
 }
 
-/* MAIN FOOTER GRID */
+/* =========================
+   MAIN FOOTER GRID
+========================= */
 
 .footer-grid {
   display: grid;
+
   grid-template-columns:
     minmax(260px, 1.55fr)
     minmax(120px, 0.68fr)
     minmax(150px, 0.9fr)
     minmax(210px, 1.05fr);
+
   gap: clamp(38px, 5vw, 70px);
+
   padding: 70px 0 55px;
 }
 
-/* BRAND */
+/* =========================
+   BRAND
+========================= */
 
 .footer-brand {
   display: inline-flex;
+
   align-items: center;
+
   gap: 13px;
+
   color: inherit;
+
   text-decoration: none;
 }
 
 .footer-brand-mark {
   display: grid;
+
   width: 50px;
   height: 50px;
+
   flex: 0 0 auto;
+
   place-items: center;
+
   overflow: hidden;
 
   border: 1px solid rgba(202, 174, 116, 0.35);
+
   border-radius: 12px;
 
   background:
@@ -97,8 +122,10 @@
 
 .footer-brand-logo {
   display: block;
+
   width: 41px;
   height: 41px;
+
   object-fit: contain;
 
   filter:
@@ -109,73 +136,110 @@
 
 .footer-brand-copy {
   display: grid;
+
   gap: 5px;
+
   line-height: 1;
 }
 
 .footer-brand-copy strong {
   color: #ffffff;
+
   font-size: 15px;
+
   font-weight: 800;
+
   letter-spacing: 0.025em;
 }
 
 .footer-brand-copy small {
   color: #c7a96b;
+
   font-size: 9px;
+
   font-weight: 750;
+
   letter-spacing: 0.08em;
 }
 
-/* OVERVIEW */
+/* =========================
+   OVERVIEW
+========================= */
 
 .footer-overview p {
   max-width: 390px;
+
   margin: 25px 0 0;
+
   color: #899297;
+
   font-size: 12px;
+
   line-height: 1.85;
 }
 
-/* COLUMNS */
+/* =========================
+   COLUMNS
+========================= */
 
 .footer-column {
   display: flex;
+
   flex-direction: column;
+
   align-items: flex-start;
+
   gap: 12px;
+
   font-size: 11px;
 }
 
 .footer-column h3 {
   position: relative;
+
   margin: 4px 0 11px;
+
   padding-bottom: 11px;
+
   color: #ffffff;
+
   font-size: 11px;
+
   font-weight: 800;
+
   letter-spacing: 0.07em;
+
   text-transform: uppercase;
 }
 
 .footer-column h3::after {
   position: absolute;
+
   bottom: 0;
   left: 0;
+
   width: 24px;
   height: 1px;
+
   content: "";
+
   background: #c7a96b;
 }
 
 .footer-column a,
 .footer-column > span {
   display: inline-flex;
+
   min-width: 0;
+
   align-items: center;
+
   gap: 8px;
+
   color: #929b9f;
+
   line-height: 1.6;
+
   text-decoration: none;
 
   transition:
@@ -185,6 +249,7 @@
 
 .footer-column a:hover {
   color: var(--gold-2, #e1bd75);
+
   transform: translateX(3px);
 }
 
@@ -195,63 +260,105 @@
 
 .footer-contact svg {
   flex: 0 0 auto;
+
   color: var(--gold, #caae74);
 }
 
-/* FOOTER BOTTOM */
+/* =========================
+   FOOTER BOTTOM
+========================= */
 
 .footer-bottom {
   display: flex;
+
   min-height: 58px;
+
   padding-top: 20px;
+
   align-items: center;
+
   justify-content: space-between;
+
   gap: 20px;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  border-top:
+    1px solid rgba(255, 255, 255, 0.09);
 
   color: #687176;
+
   font-size: 10px;
+
   font-weight: 600;
 }
 
-/* DEVELOPER CREDIT */
+.footer-copyright {
+  color: #687176;
+}
+
+/* =========================
+   DEVELOPER CREDIT
+========================= */
 
 .footer-developer {
   display: inline-flex;
+
   align-items: center;
-  gap: 7px;
 
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 10px;
-  text-decoration: none;
-
-  transition:
-    color 0.25s ease,
-    transform 0.25s ease;
+  gap: 11px;
 }
 
-.footer-developer > span {
+/*
+  Website by Sai Charan
+  ONLY TEXT - NOT A BUTTON
+*/
+
+.footer-developer-text {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
   color: #778187;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
 }
 
-.footer-developer strong {
+.footer-developer-text strong {
   color: var(--gold-2, #e1bd75);
+
   font-weight: 800;
+
+  letter-spacing: 0.01em;
 }
 
-.footer-developer i {
+/* =========================
+   WHATSAPP BUTTON ONLY
+========================= */
+
+.footer-whatsapp {
   display: grid;
+
   width: 35px;
   height: 35px;
-  margin-left: 5px;
+
   flex: 0 0 auto;
+
   place-items: center;
 
-  border: 1px solid rgba(255, 255, 255, 0.17);
+  border:
+    1px solid rgba(255, 255, 255, 0.17);
+
   border-radius: 50%;
 
   color: #ffffff;
+
+  text-decoration: none;
+
   background:
     linear-gradient(
       145deg,
@@ -262,33 +369,62 @@
   box-shadow:
     0 8px 20px rgba(37, 211, 102, 0.2);
 
+  cursor: pointer;
+
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
     background 0.25s ease;
 }
 
-.footer-developer:hover {
+.footer-whatsapp svg {
+  display: block;
+
+  width: 18px;
+  height: 18px;
+
   color: #ffffff;
-  transform: translateY(-2px);
+
+  fill: currentColor;
 }
 
-.footer-developer:hover i {
+.footer-whatsapp:hover {
   background: #25d366;
-  transform: scale(1.08);
+
+  transform:
+    translateY(-2px)
+    scale(1.08);
 
   box-shadow:
     0 12px 27px rgba(37, 211, 102, 0.3);
 }
 
-.footer-brand:focus-visible,
-.footer-column a:focus-visible,
-.footer-developer:focus-visible {
-  outline: 2px solid var(--gold-2, #e1bd75);
+.footer-whatsapp:active {
+  transform: scale(0.96);
+}
+
+.footer-whatsapp:focus-visible {
+  outline:
+    2px solid var(--gold-2, #e1bd75);
+
   outline-offset: 4px;
 }
 
-/* TABLET */
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+.footer-brand:focus-visible,
+.footer-column a:focus-visible {
+  outline:
+    2px solid var(--gold-2, #e1bd75);
+
+  outline-offset: 4px;
+}
+
+/* =========================
+   TABLET
+========================= */
 
 @media (max-width: 900px) {
   .footer-grid {
@@ -296,6 +432,7 @@
       minmax(0, 1.2fr)
       minmax(0, 0.8fr)
       minmax(0, 1fr);
+
     gap: 45px 35px;
   }
 
@@ -308,7 +445,9 @@
   }
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 650px) {
   .footer {
@@ -316,8 +455,11 @@
   }
 
   .footer-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
     gap: 39px 22px;
+
     padding: 52px 0 39px;
   }
 
@@ -327,8 +469,11 @@
 
   .footer-overview p {
     max-width: 100%;
+
     margin-top: 20px;
+
     font-size: 10.5px;
+
     line-height: 1.75;
   }
 
@@ -344,11 +489,13 @@
 
   .footer-column {
     gap: 10px;
+
     font-size: 9.5px;
   }
 
   .footer-column h3 {
     margin-bottom: 8px;
+
     font-size: 9px;
   }
 
@@ -361,32 +508,46 @@
     font-size: 10px;
   }
 
+  /* FOOTER BOTTOM MOBILE */
+
   .footer-bottom {
     min-height: 0;
+
     padding-top: 20px;
+
     align-items: flex-start;
+
     flex-direction: column;
+
     gap: 17px;
+
     font-size: 9px;
+
     line-height: 1.6;
   }
 
   .footer-developer {
+    gap: 9px;
+  }
+
+  .footer-developer-text {
     font-size: 9.5px;
   }
 
-  .footer-developer i {
+  .footer-whatsapp {
     width: 33px;
     height: 33px;
   }
 
-  .footer-developer i svg {
+  .footer-whatsapp svg {
     width: 16px;
     height: 16px;
   }
 }
 
-/* SMALL MOBILE */
+/* =========================
+   SMALL MOBILE
+========================= */
 
 @media (max-width: 380px) {
   .footer-grid {
@@ -400,19 +561,24 @@
   .footer-column {
     font-size: 9px;
   }
+
+  .footer-developer-text {
+    font-size: 9px;
+  }
+
+  .footer-whatsapp {
+    width: 32px;
+    height: 32px;
+  }
 }
+
+/* =========================
+   REDUCED MOTION
+========================= */
 
 @media (prefers-reduced-motion: reduce) {
   .footer-column a,
-  .footer-developer,
-  .footer-developer i {
+  .footer-whatsapp {
     transition: none;
   }
-}
-.footer-developer i svg {
-  display: block;
-  width: 18px;
-  height: 18px;
-  color: #ffffff;
-  fill: currentColor;
 }

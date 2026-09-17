@@ -69,7 +69,7 @@ const serviceMenu = [
       "Short Circuit Analysis",
       "Protection Coordination",
       "Arc Flash Studies",
-      "Harmonic Analysis",
+  
     ],
   },
 
@@ -91,9 +91,6 @@ const serviceMenu = [
       "3D BIM Modeling",
       "BIM Coordination",
       "Clash Detection",
-      "Scan to BIM",
-      "Shop Drawings",
-      "As-Built Models",
     ],
   },
 
@@ -104,8 +101,6 @@ const serviceMenu = [
       "Outdoor Lighting",
       "DIALux Calculations",
       "Emergency Lighting",
-      "Lighting Controls",
-      "Photometric Studies",
     ],
   },
 
@@ -116,8 +111,6 @@ const serviceMenu = [
       "Backup Generators",
       "ATS Systems",
       "Critical Switchgear",
-      "Redundancy Planning",
-      "Mission-Critical Distribution",
     ],
   },
 ];

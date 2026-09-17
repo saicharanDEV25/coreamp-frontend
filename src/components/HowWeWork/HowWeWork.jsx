@@ -34,7 +34,7 @@ const steps = [
 export default function HowWeWork() {
   return (
     <section
-      id="how-we-work"
+      id="about"
       className="how-we-work"
       aria-labelledby="how-we-work-heading"
     >
@@ -77,6 +77,7 @@ export default function HowWeWork() {
               </span>
 
               <h3>{step.title}</h3>
+
               <p>{step.text}</p>
             </li>
           ))}
